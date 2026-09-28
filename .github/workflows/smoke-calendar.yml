@@ -1,0 +1,29 @@
+name: Smoke test calendar fix
+
+on:
+  push:
+    branches: [calendar-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate calendar API syntax
+        run: node --check api/calendar.js
+
+      - name: Verify legacy Dream/Heaven/Oasis calendar endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in dream heaven oasis; do
+            echo "Testing $unit"
+            body="$(curl --fail --silent --show-error --max-time 20 "https://wac-chatgpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
+            echo "$body" | jq -e --arg unit "$unit" '.unit == $unit and (.periods | type == "array") and (.periods | length > 0)' >/dev/null
+            echo "$unit periods: $(echo "$body" | jq '.periods | length')"
+          done
