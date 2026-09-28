@@ -213,7 +213,7 @@ const galleryData={
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582021/VillaWaca_Owner_05_z50jcq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771572483/499f99a3-8e52-4e05-97da-18c335691c22.jpeg_2023-09-08_08_42_40_rymnox.jpg"]};
 const sliderState={dream:0,heaven:0,oasis:0};
-function mountApartmentSliders(){Object.keys(apartments).forEach(function(id){var root=document.getElementById("slider-"+id);apartments[id].forEach(function(src,i){var img=document.createElement("img");img.src=src;img.loading=i?"lazy":"eager";img.alt=id+" photo "+(i+1);if(i===0)img.className="active";root.insertBefore(img,root.firstChild)});updateCounter(id)})}
+function mountApartmentSliders(){Object.keys(apartments).forEach(function(id){var root=document.getElementById("slider-"+id);var firstControl=root.querySelector("button");apartments[id].forEach(function(src,i){var img=document.createElement("img");img.src=src;img.loading=i?"lazy":"eager";img.alt=id+" photo "+(i+1);if(i===0)img.className="active";root.insertBefore(img,firstControl)});updateCounter(id)})}
 function slideApt(id,dir){var imgs=document.getElementById("slider-"+id).querySelectorAll("img");imgs[sliderState[id]].classList.remove("active");sliderState[id]=(sliderState[id]+dir+imgs.length)%imgs.length;imgs[sliderState[id]].classList.add("active");updateCounter(id)}
 function updateCounter(id){document.getElementById("counter-"+id).textContent=(sliderState[id]+1)+" / "+apartments[id].length}
 let lbItems=[],lbIndex=0;
