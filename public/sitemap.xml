@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url>
+  <loc>https://villawaca.it/monopoli-puglia-villa-con-piscina</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://villawaca.it/en/villa-with-private-pool-monopoli-puglia</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://villawaca.it/de/villa-mit-privatem-pool-monopoli-apulien</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://villawaca.it/fr/villa-avec-piscine-privee-monopoli-pouilles</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://villawaca.it/es/villa-con-piscina-privada-monopoli-puglia</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://villawaca.it/ru/villa-s-basseynom-monopoli-apuliya</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://villawaca.it/</loc>
+    <lastmod>2026-02-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://villawaca.it/#apartments</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://villawaca.it/#amenities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://villawaca.it/#dolcevita</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://villawaca.it/#contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
