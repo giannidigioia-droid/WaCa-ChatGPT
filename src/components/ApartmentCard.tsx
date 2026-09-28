@@ -24,17 +24,16 @@ export function ApartmentCard({
 
   const images: Record<string, string[]> = {
     dream: [
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1600/v1771578265/PatioSudtavolopiscina_em7pyc.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582197/soggiorno_b72bp5.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582196/stanzamatrimoniale_tgtcap.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582196/bagno1_rqfoac.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582190/PatioSudTavolo_sbht2t.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582190/PatioSudDivano_wysiyl.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582194/stanzetta1posto_ryqnqg.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582197/stanzetta2posti_gqwhko.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582186/PatioSudtavolopiscina_cendix.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582189/Cucinafinestraaperta_amj5lo.jpg',
-      'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582200/bagno2_s1vwnu.jpg'
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1789631856/patio-dream-cena.png',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582089/b9dd12b5-38cb-4e6c-845d-194d27f96e13.png_2023-09-08_08_42_18_myofms.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771578266/PiscinaLuceceleste_uutpui.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582197/soggiorno_b72bp5.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582189/Cucinafinestraaperta_amj5lo.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582196/stanzamatrimoniale_tgtcap.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582194/stanzetta1posto_ryqnqg.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582197/stanzetta2posti_gqwhko.jpg',
+      'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto/v1771582196/bagno1_rqfoac.jpg'
     ],
     heaven: [
       'https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1600/v1771581295/701822006_fj57gi.jpg'
