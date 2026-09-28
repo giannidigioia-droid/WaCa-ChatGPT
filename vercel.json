@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "villawaca.it"
+        }
+      ],
+      "destination": "https://www.villawaca.it/$1",
+      "permanent": true
+    }
+  ]
+}
