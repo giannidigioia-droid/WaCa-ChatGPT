@@ -91,7 +91,7 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('heaven',-1)">‹</button>
 <button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('heaven',1)">›</button>
 <button class="open-gallery" onclick="openApartmentGallery('heaven')">Vedi tutte le foto</button>
-<div class="counter" id="counter-heaven">1 / 6</div>
+<div class="counter" id="counter-heaven">1 / 8</div>
 </div>
 <div class="apt-copy"><span class="apt-tag">4+1 OSPITI</span><span class="apt-no">02</span><h3>Heaven</h3><p>Luminoso e spazioso, con accesso diretto al patio, alla piscina e al giardino.</p><a class="apt-link" href="#booking" onclick="selectUnit('heaven')">Richiedi Heaven ↗</a></div>
 </article>
@@ -101,7 +101,7 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('oasis',-1)">‹</button>
 <button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('oasis',1)">›</button>
 <button class="open-gallery" onclick="openApartmentGallery('oasis')">Vedi tutte le foto</button>
-<div class="counter" id="counter-oasis">1 / 6</div>
+<div class="counter" id="counter-oasis">1 / 7</div>
 </div>
 <div class="apt-copy"><span class="apt-tag">4 OSPITI</span><span class="apt-no">03</span><h3>Oasis</h3><p>Il rifugio più intimo: una camera, living con divano letto e un angolo riservato di giardino.</p><a class="apt-link" href="#booking" onclick="selectUnit('oasis')">Richiedi Oasis ↗</a></div>
 </article>
@@ -161,21 +161,25 @@ const apartments={
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582196/bagno1_rqfoac.jpg"
  ],
  heaven:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771581998/701822084_wurbyn.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582091/1cae34a1-6601-47ba-a50f-e5c197502e74_2023-09-08_08_42_13_aifps4.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582079/4542d8a2-3fac-4afe-9a30-8372a3209b02.jpeg_2023-09-08_08_42_27_as0gyq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582075/6b168170-f02f-424f-a4a4-fb780323cf07.jpeg_2023-09-08_08_42_30_mb495z.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582075/cd009c0e-2434-4f96-9bb6-ababea44e331.jpeg_2023-09-08_08_42_29_ck0ey6.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582074/0bf2b236-c5dc-430e-a4f4-63d38a704dda.jpeg_2023-09-08_08_42_32_ssyded.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1789651755/Patio_Heaven_ki0yrt.png",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779980287/patio_heaven_hq_2.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779982794/heaven_tavolo_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779977040/camera_da_letto_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779980919/stanzetta_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779981046/cucina_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779980565/bagno_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779974085/patio_heaven_hq.jpg"
  ],
  oasis:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771581999/701822049_mqvxn3.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582056/aac82b47-f39f-4d43-85ca-ef506c73de4a.jpeg_2023-09-08_08_42_46_e1t2x1.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582053/8d19304f-1918-4fb4-b56f-470ac7eef1e0.jpeg_2023-09-08_08_42_49_de4m69.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582051/dfce715d-80f5-4249-b2c2-77820ed75e49.jpeg_2023-09-08_08_42_51_re6ris.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582051/f81328c4-3376-4ec9-8981-a8dee33682cf.jpeg_2023-09-08_08_42_52_binufj.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582049/4f82d3f5-14b8-4ac5-960d-974aa97c0452.jpeg_2023-09-08_08_42_52_g5uy1r.jpg"
- ]};
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779974521/patio_oasis_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1789651756/Patio_Oasis_HD_gokk7g.png",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779981929/oasis_tavolo_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779982474/oasis_letto_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779980420/angolo_cottura_oasis_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779976761/cucina_oasis_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1779980031/bagno_oasis_hq.jpg"
+ ]
+]};
 const galleryData={
  Piscina:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578266/PiscinaLuceceleste_uutpui.jpg",
