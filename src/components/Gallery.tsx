@@ -81,7 +81,7 @@ export function Gallery() {
   }, {
     id: 6,
     name: 'Zona Giardino',
-    photos: ['https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771581990/701822261_efsgzv.jpg', "/images/VistaPanoramica.JPG", 'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771572483/499f99a3-8e52-4e05-97da-18c335691c22.jpeg_2023-09-08_08_42_40_rymnox.jpg']
+    photos: ['https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771581990/701822261_efsgzv.jpg', 'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771582021/VillaWaca_Owner_05_z50jcq.jpg', 'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771572483/499f99a3-8e52-4e05-97da-18c335691c22.jpeg_2023-09-08_08_42_40_rymnox.jpg']
   }];
   return <section id="moments" className="py-24 px-4 bg-paper-texture-dark scroll-mt-24">
 
