@@ -3,6 +3,7 @@ const ENV_NAMES={
   heaven:["WACA_HEAVEN_ICAL","HEAVEN_ICAL_URL","ICAL_HEAVEN_URL","GOOGLE_ICAL_HEAVEN","HEAVEN_ICAL"],
   oasis:["WACA_OASIS_ICAL","OASIS_ICAL_URL","ICAL_OASIS_URL","GOOGLE_ICAL_OASIS","OASIS_ICAL"]
 };
+const LEGACY_API=process.env.LEGACY_CALENDAR_API||"https://wac-chatgpt.vercel.app/api/calendar";
 function envUrl(unit){for(const n of ENV_NAMES[unit]||[]){if(process.env[n])return process.env[n]}return null}
 function unfold(s){return s.replace(/\r?\n[ \t]/g,"")}
 function dateOnly(v){if(!v)return null;const m=v.match(/(\d{4})(\d{2})(\d{2})/);return m?m[1]+"-"+m[2]+"-"+m[3]:null}
@@ -18,10 +19,21 @@ function parseIcs(text){
   periods.sort((a,b)=>a.start.localeCompare(b.start));return periods;
 }
 async function one(unit){
-  const url=envUrl(unit);if(!url)throw new Error("Missing iCal env for "+unit);
-  const r=await fetch(url,{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
-  if(!r.ok)throw new Error("iCal fetch failed "+r.status);
-  return parseIcs(await r.text());
+  const url=envUrl(unit);
+  if(url){
+    try{
+      const r=await fetch(url,{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+      if(r.ok)return parseIcs(await r.text());
+    }catch{}
+  }
+  const fallback=await fetch(LEGACY_API+"?unit="+encodeURIComponent(unit)+"&_="+Date.now(),{
+    cache:"no-store",
+    headers:{"Cache-Control":"no-cache"}
+  });
+  if(!fallback.ok)throw new Error("Calendar fallback failed "+fallback.status);
+  const data=await fallback.json();
+  if(!Array.isArray(data.periods))throw new Error("Calendar fallback returned invalid data");
+  return data.periods;
 }
 function merge(periods){
   if(!periods.length)return[];
