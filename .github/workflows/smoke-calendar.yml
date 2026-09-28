@@ -17,13 +17,22 @@ jobs:
       - name: Validate calendar API syntax
         run: node --check api/calendar.js
 
-      - name: Verify legacy Dream/Heaven/Oasis calendar endpoints
+      - name: Verify Google Calendar public iCal feeds
         shell: bash
         run: |
           set -euo pipefail
+          declare -A CALS
+          CALS[dream]='3c8c5d5e9463606eb83d6c66a96a66b90457bfc824547f64fd44b1061b66f7bc@group.calendar.google.com'
+          CALS[heaven]='47d86582e66d6bbde3c9f13ce322190657a9bda69a5bf52c909e51e0236bde5d@group.calendar.google.com'
+          CALS[oasis]='8907fa1c1f0226ae01aec85cbd8e76e6214a1eda1d0ea944ce9a3695f96e223c@group.calendar.google.com'
           for unit in dream heaven oasis; do
+            id="${CALS[$unit]}"
+            enc="$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1], safe=""))' "$id")"
+            url="https://calendar.google.com/calendar/ical/$enc/public/basic.ics"
             echo "Testing $unit"
-            body="$(curl --fail --silent --show-error --max-time 20 "https://wac-chatgpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
-            echo "$body" | jq -e --arg unit "$unit" '.unit == $unit and (.periods | type == "array") and (.periods | length > 0)' >/dev/null
-            echo "$unit periods: $(echo "$body" | jq '.periods | length')"
+            body="$(curl --fail --silent --show-error --max-time 20 "$url")"
+            echo "$body" | grep -q 'BEGIN:VCALENDAR'
+            count="$(echo "$body" | grep -c 'BEGIN:VEVENT' || true)"
+            test "$count" -gt 0
+            echo "$unit events: $count"
           done
