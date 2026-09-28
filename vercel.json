@@ -1,15 +1,23 @@
 {
-  "redirects": [
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, max-age=0"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
-      "has": [
+      "headers": [
         {
-          "type": "host",
-          "value": "villawaca.it"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
         }
-      ],
-      "destination": "https://www.villawaca.it/$1",
-      "permanent": true
+      ]
     }
   ]
 }

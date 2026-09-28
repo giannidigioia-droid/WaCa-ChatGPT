@@ -1,116 +1,237 @@
 <!doctype html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WaCa Apulian Villa | Monopoli, Puglia</title>
+<meta name="description" content="WaCa Apulian Villa a Monopoli: villa con piscina al sale tra gli ulivi, composta da Dream, Heaven e Oasis.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://villawaca.it/">
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1ede5;--ink:#12221b;--muted:#6f766e;--sage:#e4e9da;--white:#fffdf8;--line:rgba(18,34,27,.14);--accent:#243d31}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+a{color:inherit}.serif{font-family:"Cormorant Garamond",Georgia,serif}
+nav{position:fixed;z-index:50;top:0;left:0;right:0;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;background:rgba(241,237,229,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:.08em}.brand-mark{width:30px;height:30px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:Georgia,serif}
+.navlinks{display:flex;gap:28px;align-items:center}.navlinks a{text-decoration:none;font-size:13px}.navcta{border:1px solid var(--ink);padding:10px 15px}
+.hero{min-height:92vh;display:grid;grid-template-columns:1.05fr .95fr;padding-top:67px}.hero-copy{padding:10vw 6vw 5vw;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}.hero h1,.apartments-title,.section-title{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;letter-spacing:-.03em}
+.hero h1{font-size:clamp(68px,8.6vw,150px);line-height:.82;margin:0 0 28px}.hero p{max-width:600px;color:var(--muted);font-size:17px;line-height:1.7}
+.hero-actions{display:flex;gap:12px;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border:1px solid var(--ink);background:transparent;text-decoration:none;font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}.btn.dark{background:var(--ink);color:white}
+.hero-image{min-height:650px;background:url("https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582097/PiscinaLuceceleste_roevfr.jpg") center/cover no-repeat}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.stat{padding:24px 30px;border-right:1px solid var(--line)}.stat:last-child{border-right:0}.stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:27px}.stat span{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:7vw;padding:9vw 6vw}.section-title{font-size:clamp(48px,6vw,92px);line-height:.95;margin:0}.intro-copy{align-self:end}.intro-copy p{font-size:18px;line-height:1.8;color:var(--muted)}
+.villa-feature{display:grid;grid-template-columns:1.2fr .8fr;min-height:70vh}.villa-photo{background:url("https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771572465/0a994447-8767-4c38-ab2c-baeec79332b6.jpeg_2023-09-08_08_42_43_x18xsl.jpg") center/cover no-repeat}.villa-copy{padding:6vw;background:var(--white);display:flex;flex-direction:column;justify-content:center}.villa-copy h3{font:500 64px/1 "Cormorant Garamond",serif;margin:12px 0 20px}.villa-copy p{color:var(--muted);line-height:1.8}
+.apartments{padding:9vw 0 0}.apartments-head{padding:0 6vw 5vw}.apartments-title{font-size:clamp(66px,8vw,130px);line-height:.82;margin:0;max-width:1000px}
+.apt-row{display:grid;grid-template-columns:1.1fr .9fr;min-height:620px;border-top:1px solid var(--line)}.apt-row:nth-child(even){grid-template-columns:.9fr 1.1fr}.apt-row:nth-child(even) .apt-media{order:2}.apt-row:nth-child(even) .apt-copy{order:1}
+.apt-media{position:relative;background:#d9e0d4;overflow:hidden}.apt-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}.apt-media img.active{opacity:1}
+.apt-copy{padding:6vw;background:var(--sage);display:flex;flex-direction:column;justify-content:center;position:relative}.apt-no{font-size:11px;letter-spacing:.18em;position:absolute;top:22%;left:17%}.apt-copy h3{font:500 clamp(76px,7vw,120px)/.9 "Cormorant Garamond",serif;margin:0 0 22px;text-align:center}.apt-copy p{max-width:520px;color:#46564e;line-height:1.7;margin:0 auto 26px}.apt-tag{position:absolute;top:20px;right:20px;background:var(--white);padding:12px 16px;font-size:11px;letter-spacing:.05em}.apt-link{text-align:center;font-size:12px;text-transform:uppercase;letter-spacing:.1em;text-decoration:none}
+.slider-btn{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.88);font-size:25px;cursor:pointer}.slider-prev{left:18px}.slider-next{right:18px}.counter{position:absolute;z-index:4;bottom:18px;right:18px;background:rgba(10,20,15,.72);color:white;padding:8px 11px;font-size:12px}.open-gallery{position:absolute;z-index:4;bottom:18px;left:18px;background:rgba(255,255,255,.88);border:0;padding:10px 13px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.gallery{padding:9vw 6vw}.gallery-top{display:flex;justify-content:space-between;gap:40px;align-items:end}.gallery-count{font-size:12px;letter-spacing:.16em}.gallery-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:30px 0}.gallery-tabs button{border:1px solid var(--line);background:transparent;padding:10px 13px;cursor:pointer}.gallery-tabs button.active{background:var(--ink);color:#fff}.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-grid button{border:0;padding:0;background:none;aspect-ratio:4/3;overflow:hidden;cursor:zoom-in}.gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.gallery-grid button:hover img{transform:scale(1.035)}
+.amenities{padding:7vw 6vw;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.amenity-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:42px}.amenity{padding:27px 0;border-top:1px solid var(--line);font-family:"Cormorant Garamond",serif;font-size:29px}.amenity span{font:400 11px Inter,sans-serif;color:var(--muted);margin-right:20px}
+.quote{min-height:62vh;background:url("https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771578262/PatioSud_uxb3ey.jpg") center/cover fixed;position:relative;display:grid;place-items:center;text-align:center;color:#fff}.quote:before{content:"";position:absolute;inset:0;background:rgba(9,20,15,.55)}.quote-inner{position:relative;max-width:950px;padding:50px}.quote q{font:500 clamp(50px,6vw,90px)/.95 "Cormorant Garamond",serif}.quote small{display:block;margin-top:30px;letter-spacing:.16em}
+.location{display:grid;grid-template-columns:1fr 1fr;padding:8vw 6vw;gap:8vw}.location-list{margin-top:36px}.location-item{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:17px 0}.location-item:last-child{border-bottom:1px solid var(--line)}
+.reviews{padding:8vw 6vw;background:var(--white)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}.review{border:1px solid var(--line);padding:28px}.stars{letter-spacing:.08em}.review p{color:var(--muted);line-height:1.7}.review b{font-size:11px;letter-spacing:.12em}
+.booking{padding:8vw 6vw;background:#183126;color:white}.booking-wrap{max-width:1180px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw}.booking .section-title{color:white}.proof{font-size:13px;line-height:2;color:#d7e1db}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}.choice{border:1px solid rgba(255,255,255,.28);background:transparent;color:white;text-align:left;padding:17px;cursor:pointer}.choice.active{background:white;color:var(--ink)}.choice b{display:block;font-family:"Cormorant Garamond",serif;font-size:28px}.choice span{font-size:11px}
+.availability{background:rgba(255,255,255,.07);padding:18px;margin:15px 0;min-height:64px}.calendar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.month{background:#f7f3eb;color:var(--ink);padding:12px}.month h4{text-align:center;margin:0 0 9px;font-family:"Cormorant Garamond",serif;font-size:21px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:11px}.day{aspect-ratio:1;display:grid;place-items:center}.day.busy{background:#b66b54;color:white}.day.head{font-weight:600;aspect-ratio:auto;padding:3px 0}.day.empty{opacity:0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;letter-spacing:.12em;text-transform:uppercase}.field input,.field select{width:100%;padding:13px;border:0;background:#f7f3eb;color:var(--ink);font:14px Inter,sans-serif}.submit{margin-top:12px;width:100%;padding:15px;border:0;background:white;color:var(--ink);cursor:pointer;text-transform:uppercase;letter-spacing:.1em}.form-status{font-size:13px;margin-top:12px}
+footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:12px}.footer-links{display:flex;gap:20px}
+.lightbox{position:fixed;z-index:100;inset:0;background:rgba(6,11,8,.95);display:none;align-items:center;justify-content:center;padding:30px}.lightbox.open{display:flex}.lightbox img{max-width:92vw;max-height:86vh;object-fit:contain}.lb-close,.lb-prev,.lb-next{position:absolute;border:0;background:rgba(255,255,255,.9);width:45px;height:45px;border-radius:50%;font-size:24px;cursor:pointer}.lb-close{right:20px;top:20px}.lb-prev{left:20px;top:50%}.lb-next{right:20px;top:50%}
+.floating{position:fixed;z-index:45;right:20px;bottom:20px;background:#183126;color:white;text-decoration:none;padding:14px 17px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:900px){.navlinks{display:none}.hero,.intro,.villa-feature,.apt-row,.apt-row:nth-child(even),.location,.booking-wrap{grid-template-columns:1fr}.hero-image{min-height:55vh}.stats{grid-template-columns:repeat(2,1fr)}.apt-row:nth-child(even) .apt-media,.apt-row:nth-child(even) .apt-copy{order:initial}.apt-media{min-height:440px}.gallery-grid{grid-template-columns:repeat(2,1fr)}.amenity-grid,.review-grid{grid-template-columns:1fr}.calendar-wrap{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero h1{font-size:76px}.apartments-title{font-size:72px}.section-title{font-size:56px}.villa-copy h3{font-size:50px}}
+</style>
+</head>
+<body>
+<nav>
+<a class="brand" href="#home"><span class="brand-mark">W</span><span>WaCa APULIAN VILLA</span></a>
+<div class="navlinks"><a href="#villa">La villa</a><a href="#alloggi">Alloggi</a><a href="#gallery">Gallery</a><a href="#posizione">Posizione</a><a class="navcta" href="#booking">Verifica disponibilità</a></div>
+</nav>
 
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+<header id="home" class="hero">
+<div class="hero-copy">
+<div class="eyebrow">MONOPOLI · PUGLIA</div>
+<h1>Il lusso<br>di rallentare.</h1>
+<p>Una villa privata tra ulivi secolari, a pochi minuti dal mare. Tre spazi indipendenti, un’unica esperienza autentica.</p>
+<div class="hero-actions"><a class="btn dark" href="#booking">Verifica disponibilità</a><a class="btn" href="#villa">Esplora la villa</a></div>
+</div>
+<div class="hero-image"></div>
+</header>
 
-    <!-- Google Ads Global Site Tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17975995747"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
+<div class="stats"><div class="stat"><b>15</b><span>ospiti</span></div><div class="stat"><b>6</b><span>camere</span></div><div class="stat"><b>12×4 m</b><span>piscina</span></div><div class="stat"><b>10 min</b><span>Monopoli</span></div></div>
 
-      gtag('js', new Date())
-      gtag('config', 'AW-17975995747', {
-        anonymize_ip: true,
-        allow_google_signals: true,
-      })
-    </script>
+<section id="villa" class="intro">
+<div><div class="eyebrow">WACA APULIAN VILLA</div><h2 class="section-title">Un rifugio contemporaneo nell’anima della Puglia.</h2></div>
+<div class="intro-copy"><p>Spazi luminosi, silenzio e natura. WaCa può essere riservata interamente oppure vissuta attraverso Dream, Heaven e Oasis. Ogni soggiorno nasce per offrire privacy, comfort e il ritmo lento della campagna pugliese.</p><a href="#alloggi">Scopri gli alloggi ↗</a></div>
+</section>
 
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<section class="villa-feature">
+<div class="villa-photo"></div>
+<div class="villa-copy"><div class="eyebrow">01 · INTERA VILLA</div><h3>Privacy assoluta.</h3><p>La proprietà completa per famiglie e gruppi: tre appartamenti indipendenti, piscina al sale, uliveto e ampi spazi esterni.</p><a class="btn" href="#booking">Verifica disponibilità</a></div>
+</section>
 
-    <!-- SEO -->
-    <title>WaCa Apulian Villa | Villa con Piscina Privata a Monopoli, Puglia</title>
-    <meta
-      name="description"
-      content="WaCa Apulian Villa a Monopoli (Puglia): villa con piscina al sale e 3 appartamenti (Dream, Oasis, Heaven). A pochi minuti dal mare e dal centro storico. Prenota il tuo soggiorno."
-    />
-    <meta
-      name="keywords"
-      content="villa Monopoli, villa con piscina Monopoli, villa Puglia, villa con piscina privata Puglia, casa vacanze Monopoli, Valle d'Itria, soggiorno Puglia, WaCa Apulian Villa"
-    />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://villawaca.it/" />
+<section id="alloggi" class="apartments">
+<div class="apartments-head"><div class="eyebrow">I NOSTRI SPAZI</div><h2 class="apartments-title">Scegli il tuo modo<br>di vivere WaCa.</h2></div>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="WaCa Apulian Villa" />
-    <meta property="og:title" content="WaCa Apulian Villa | Villa con Piscina Privata a Monopoli, Puglia" />
-    <meta
-      property="og:description"
-      content="WaCa Apulian Villa a Monopoli (Puglia): villa con piscina al sale e 3 appartamenti (Dream, Oasis, Heaven). A pochi minuti dal mare e dal centro storico."
-    />
-    <meta property="og:url" content="https://villawaca.it/" />
-    <meta
-      property="og:image"
-      content="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1200,h_630,c_fill/v1771582097/PiscinaLuceceleste_roevfr.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="it_IT" />
+<article class="apt-row" data-apt="dream">
+<div class="apt-media" id="slider-dream">
+<button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('dream',-1)">‹</button>
+<button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('dream',1)">›</button>
+<button class="open-gallery" onclick="openApartmentGallery('dream')">Vedi tutte le foto</button>
+<div class="counter" id="counter-dream">1 / 10</div>
+</div>
+<div class="apt-copy"><span class="apt-tag">4+2 OSPITI</span><span class="apt-no">01</span><h3>Dream</h3><p>Tre camere, cucina completa e due patii privati, uno affacciato sulla piscina.</p><a class="apt-link" href="#booking" onclick="selectUnit('dream')">Richiedi Dream ↗</a></div>
+</article>
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="WaCa Apulian Villa | Villa con Piscina Privata a Monopoli, Puglia" />
-    <meta name="twitter:description" content="Villa con piscina al sale e 3 appartamenti a Monopoli, Puglia." />
-    <meta
-      name="twitter:image"
-      content="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1200,h_630,c_fill/v1771582097/PiscinaLuceceleste_roevfr.jpg"
-    />
+<article class="apt-row" data-apt="heaven">
+<div class="apt-media" id="slider-heaven">
+<button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('heaven',-1)">‹</button>
+<button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('heaven',1)">›</button>
+<button class="open-gallery" onclick="openApartmentGallery('heaven')">Vedi tutte le foto</button>
+<div class="counter" id="counter-heaven">1 / 6</div>
+</div>
+<div class="apt-copy"><span class="apt-tag">4+1 OSPITI</span><span class="apt-no">02</span><h3>Heaven</h3><p>Luminoso e spazioso, con accesso diretto al patio, alla piscina e al giardino.</p><a class="apt-link" href="#booking" onclick="selectUnit('heaven')">Richiedi Heaven ↗</a></div>
+</article>
 
-    <!-- Performance -->
-    <link rel="preconnect" href="https://res.cloudinary.com" />
-    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+<article class="apt-row" data-apt="oasis">
+<div class="apt-media" id="slider-oasis">
+<button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('oasis',-1)">‹</button>
+<button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('oasis',1)">›</button>
+<button class="open-gallery" onclick="openApartmentGallery('oasis')">Vedi tutte le foto</button>
+<div class="counter" id="counter-oasis">1 / 6</div>
+</div>
+<div class="apt-copy"><span class="apt-tag">4 OSPITI</span><span class="apt-no">03</span><h3>Oasis</h3><p>Il rifugio più intimo: una camera, living con divano letto e un angolo riservato di giardino.</p><a class="apt-link" href="#booking" onclick="selectUnit('oasis')">Richiedi Oasis ↗</a></div>
+</article>
+</section>
 
-    <!-- Structured Data: LodgingBusiness -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LodgingBusiness",
-        "name": "WaCa Apulian Villa",
-        "url": "https://villawaca.it/",
-        "description": "WaCa Apulian Villa a Monopoli (Puglia): villa con piscina al sale e 3 appartamenti (Dream, Oasis, Heaven).",
-        "image": [
-          "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1600/v1771582097/PiscinaLuceceleste_roevfr.jpg"
-        ],
-        "inLanguage": "it-IT",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Monopoli",
-          "addressRegion": "Puglia",
-          "postalCode": "70043",
-          "addressCountry": "IT"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 40.95,
-          "longitude": 17.30
-        },
-        "amenityFeature": [
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "Piscina",
-            "value": true
-          },
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "Piscina al sale",
-            "value": true
-          }
-        ],
-        "sameAs": []
-      }
-    </script>
-  </head>
+<section id="gallery" class="gallery">
+<div class="gallery-top"><div><div class="eyebrow">29 FOTOGRAFIE</div><h2 class="section-title">Dentro WaCa.</h2><p>Clicca su una categoria per vedere tutte le immagini.</p></div><div class="gallery-count" id="galleryCount"></div></div>
+<div class="gallery-tabs" id="galleryTabs"></div><div class="gallery-grid" id="galleryGrid"></div>
+</section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
-  </body>
+<section class="amenities"><div class="eyebrow">TUTTO CIÒ CHE SERVE</div><div class="amenity-grid"><div class="amenity"><span>01</span>Piscina ad acqua salata</div><div class="amenity"><span>02</span>Giardino di ulivi</div><div class="amenity"><span>03</span>Tre cucine attrezzate</div><div class="amenity"><span>04</span>Wi-Fi gratuito</div><div class="amenity"><span>05</span>Parcheggio privato</div><div class="amenity"><span>06</span>Aria condizionata</div></div></section>
+
+<section class="quote"><div class="quote-inner"><q>You don’t just visit Puglia. For a while, you live it.</q><small>LIVE SLOWLY, BREATHE DEEPLY, FEEL AT HOME.</small></div></section>
+
+<section id="posizione" class="location"><div><div class="eyebrow">Monopoli · 40°57′N 17°18′E</div><h2 class="section-title">Monopoli,<br>Puglia.</h2></div><div><p>Tra la Valle d’Itria e il mare Adriatico, in una posizione ideale per scoprire borghi, spiagge e sapori autentici.</p><div class="location-list"><div class="location-item"><span>Monopoli centro</span><b>10 min</b></div><div class="location-item"><span>Polignano a Mare</span><b>15 min</b></div><div class="location-item"><span>Alberobello</span><b>20 min</b></div><div class="location-item"><span>Ostuni</span><b>25 min</b></div></div><p><a href="https://maps.google.com/?q=Contrada+Vagone+329%2FF+Monopoli" target="_blank" rel="noopener">APRI LA MAPPA ↗</a></p></div></section>
+
+<section class="reviews"><div class="eyebrow">PAROLE DEGLI OSPITI</div><h2 class="section-title">Chi arriva,<br>vuole tornare.</h2><div class="review-grid"><div class="review"><div class="stars">★★★★★</div><p>“Un posto bellissimo in un uliveto, lontano dalla folla. Il relax più autentico.”</p><b>PIOTR · AIRBNB</b></div><div class="review"><div class="stars">★★★★★</div><p>“The location is incredibly peaceful and quiet. Everything is beautifully maintained.”</p><b>MAJA · BOOKING</b></div><div class="review"><div class="stars">★★★★★</div><p>“Casa come nelle foto, posizione strategica e proprietari super accoglienti.”</p><b>PASQUALE · AIRBNB</b></div></div></section>
+
+<section id="booking" class="booking"><div class="booking-wrap">
+<div><div class="eyebrow">PRENOTAZIONE DIRETTA</div><h2 class="section-title">Verifica disponibilità.</h2><p>Scegli la soluzione che preferisci per vedere le date disponibili e inviare una richiesta senza impegno.</p><div class="proof">✓ Disponibilità da Google Calendar<br>✓ Nessun pagamento ora<br>✓ Risposta diretta dall’host</div></div>
+<div>
+<div class="choices"><button class="choice" data-unit="oasis" onclick="selectUnit('oasis')"><span>SOLUZIONE PREFERITA</span><b>Oasis</b><span>fino a 4 ospiti</span></button><button class="choice" data-unit="heaven" onclick="selectUnit('heaven')"><b>Heaven</b><span>fino a 5 ospiti</span></button><button class="choice" data-unit="dream" onclick="selectUnit('dream')"><b>Dream</b><span>fino a 6 ospiti</span></button><button class="choice" data-unit="villa" onclick="selectUnit('villa')"><span>SOLUZIONE PREMIUM</span><b>Villa intera</b><span>fino a 15 ospiti</span></button></div>
+<div style="font-size:12px">Soggiorno minimo 5 notti. Eccezioni su richiesta via WhatsApp.</div>
+<div class="availability" id="availability">Seleziona una soluzione per vedere il calendario.</div>
+<div class="calendar-wrap" id="calendarWrap"></div>
+<form id="bookingForm" onsubmit="submitBooking(event)">
+<input type="hidden" id="unit" name="unit">
+<div class="form-grid">
+<div class="field"><label>Check-in</label><input id="checkin" type="date" required></div>
+<div class="field"><label>Check-out</label><input id="checkout" type="date" required></div>
+<div class="field"><label>Adulti</label><select id="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
+<div class="field"><label>Ragazzi</label><select id="children"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+<div class="field"><label>Nome completo</label><input id="name" required></div>
+<div class="field"><label>Email o telefono</label><input id="contact" required></div>
+</div>
+<button class="submit" type="submit">Chiedi disponibilità ↗</button><div class="form-status" id="formStatus">Si aprirà WhatsApp con la richiesta già compilata.</div>
+</form>
+</div></div></section>
+
+<footer><div>WaCa APULIAN VILLA · Contrada Vagone, 329/F · Monopoli, Puglia</div><div class="footer-links"><a href="https://wa.me/393200921182" target="_blank" rel="noopener">WhatsApp ↗</a><a href="https://www.instagram.com/waca_monopoli/" target="_blank" rel="noopener">Instagram ↗</a><a href="#home">Torna su ↑</a></div></footer>
+<a class="floating" href="#booking">VERIFICA DISPONIBILITÀ</a>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><button class="lb-close" onclick="closeLightbox()">×</button><button class="lb-prev" onclick="lbMove(-1,event)">‹</button><img id="lbImg" alt="WaCa gallery"><button class="lb-next" onclick="lbMove(1,event)">›</button></div>
+
+<script>
+const apartments={
+ dream:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1789631856/patio-dream-cena.png",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582089/b9dd12b5-38cb-4e6c-845d-194d27f96e13.png_2023-09-08_08_42_18_myofms.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771578266/PiscinaLuceceleste_uutpui.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582197/soggiorno_b72bp5.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582189/Cucinafinestraaperta_amj5lo.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582196/stanzamatrimoniale_tgtcap.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582194/stanzetta1posto_ryqnqg.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582197/stanzetta2posti_gqwhko.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582196/bagno1_rqfoac.jpg"
+ ],
+ heaven:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771581998/701822084_wurbyn.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582091/1cae34a1-6601-47ba-a50f-e5c197502e74_2023-09-08_08_42_13_aifps4.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582079/4542d8a2-3fac-4afe-9a30-8372a3209b02.jpeg_2023-09-08_08_42_27_as0gyq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582075/6b168170-f02f-424f-a4a4-fb780323cf07.jpeg_2023-09-08_08_42_30_mb495z.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582075/cd009c0e-2434-4f96-9bb6-ababea44e331.jpeg_2023-09-08_08_42_29_ck0ey6.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582074/0bf2b236-c5dc-430e-a4f4-63d38a704dda.jpeg_2023-09-08_08_42_32_ssyded.jpg"
+ ],
+ oasis:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771581999/701822049_mqvxn3.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582056/aac82b47-f39f-4d43-85ca-ef506c73de4a.jpeg_2023-09-08_08_42_46_e1t2x1.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582053/8d19304f-1918-4fb4-b56f-470ac7eef1e0.jpeg_2023-09-08_08_42_49_de4m69.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582051/dfce715d-80f5-4249-b2c2-77820ed75e49.jpeg_2023-09-08_08_42_51_re6ris.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582051/f81328c4-3376-4ec9-8981-a8dee33682cf.jpeg_2023-09-08_08_42_52_binufj.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771582049/4f82d3f5-14b8-4ac5-960d-974aa97c0452.jpeg_2023-09-08_08_42_52_g5uy1r.jpg"
+ ]};
+const galleryData={
+ Piscina:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578266/PiscinaLuceceleste_uutpui.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582021/VillaWaca_Owner_05_z50jcq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582017/VillaWaca_Owner_021_tapbd2.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582043/483991802_vbzjsd.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582044/c0451476-8e41-4712-88ef-8f6a208ada47_2023-09-08_08_42_58_oo3iwn.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582031/096463b2-44b4-4f47-ab72-dd6582fd9922.jpeg_2023-09-08_08_42_21_k2zkxt.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582066/49c2301a-dbb5-4b4d-aaa8-0627640117a7.jpeg_2023-09-08_08_42_40_wf3g5w.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582024/VillaWaca_Owner_022_z0adj1.jpg"],
+ Patio:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578263/PatioSudDivano_t9j8ql.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582034/Copy_of_17132566715449_knzk7e.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582034/Copy_of_17132566998848_pjft2t.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578262/PatioSud_uxb3ey.jpg"],
+ Esterni:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771581997/701822217_hel08b.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771581998/701822084_wurbyn.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771581998/701822055_vezdpa.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771581999/701822049_mqvxn3.jpg"],
+ Camere:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578270/stanzamatrimoniale_xtvftu.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578385/701821811_udjqav.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578486/701821930_ihvhgi.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771578388/701821813_jtfc8x.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582197/stanzetta2posti_gqwhko.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582194/stanzetta1posto_ryqnqg.jpg"],
+ Interni:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582197/soggiorno_b72bp5.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582196/bagno1_rqfoac.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582200/bagno2_s1vwnu.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582189/Cucinafinestraaperta_amj5lo.jpg"],
+ Giardino:[
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771581990/701822261_efsgzv.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771582021/VillaWaca_Owner_05_z50jcq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1400/v1771572483/499f99a3-8e52-4e05-97da-18c335691c22.jpeg_2023-09-08_08_42_40_rymnox.jpg"]};
+const sliderState={dream:0,heaven:0,oasis:0};
+function mountApartmentSliders(){Object.keys(apartments).forEach(function(id){var root=document.getElementById("slider-"+id);apartments[id].forEach(function(src,i){var img=document.createElement("img");img.src=src;img.loading=i?"lazy":"eager";img.alt=id+" photo "+(i+1);if(i===0)img.className="active";root.insertBefore(img,root.firstChild)});updateCounter(id)})}
+function slideApt(id,dir){var imgs=document.getElementById("slider-"+id).querySelectorAll("img");imgs[sliderState[id]].classList.remove("active");sliderState[id]=(sliderState[id]+dir+imgs.length)%imgs.length;imgs[sliderState[id]].classList.add("active");updateCounter(id)}
+function updateCounter(id){document.getElementById("counter-"+id).textContent=(sliderState[id]+1)+" / "+apartments[id].length}
+let lbItems=[],lbIndex=0;
+function openApartmentGallery(id){lbItems=apartments[id];lbIndex=sliderState[id];showLightbox()}
+function openLightboxFrom(items,i){lbItems=items;lbIndex=i;showLightbox()}
+function showLightbox(){document.getElementById("lbImg").src=lbItems[lbIndex];document.getElementById("lightbox").classList.add("open");document.body.style.overflow="hidden"}
+function closeLightbox(e){if(e&&e.target!==document.getElementById("lightbox")&&e.target.className!=="lb-close")return;document.getElementById("lightbox").classList.remove("open");document.body.style.overflow=""}
+function lbMove(dir,e){if(e)e.stopPropagation();lbIndex=(lbIndex+dir+lbItems.length)%lbItems.length;document.getElementById("lbImg").src=lbItems[lbIndex]}
+function renderGallery(cat){document.querySelectorAll(".gallery-tabs button").forEach(function(b){b.classList.toggle("active",b.dataset.cat===cat)});var arr=galleryData[cat],grid=document.getElementById("galleryGrid");document.getElementById("galleryCount").textContent=arr.length+" foto";grid.innerHTML="";arr.forEach(function(src,i){var b=document.createElement("button");b.innerHTML='<img src="'+src+'" loading="lazy" alt="WaCa '+cat+'">';b.onclick=function(){openLightboxFrom(arr,i)};grid.appendChild(b)})}
+function initGallery(){var tabs=document.getElementById("galleryTabs");Object.keys(galleryData).forEach(function(cat){var b=document.createElement("button");b.textContent=cat;b.dataset.cat=cat;b.onclick=function(){renderGallery(cat)};tabs.appendChild(b)});renderGallery("Piscina")}
+let busyPeriods=[];
+function selectUnit(unit){document.getElementById("unit").value=unit;document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});loadAvailability(unit)}
+async function loadAvailability(unit){var box=document.getElementById("availability");box.textContent="Aggiornamento calendario in corso…";document.getElementById("calendarWrap").innerHTML="";try{var r=await fetch("/api/calendar?unit="+encodeURIComponent(unit)+"&_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("calendar");var data=await r.json();busyPeriods=data.periods||[];box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · aggiornato ora";renderCalendars()}catch(err){busyPeriods=[];box.textContent="Calendario temporaneamente non disponibile. Puoi comunque inviare la richiesta.";renderCalendars()}}
+function isBusy(dateStr){return busyPeriods.some(function(p){return dateStr>=p.start&&dateStr<p.end})}
+function renderCalendars(){var wrap=document.getElementById("calendarWrap");wrap.innerHTML="";var now=new Date();for(var m=0;m<3;m++){var d=new Date(now.getFullYear(),now.getMonth()+m,1);var year=d.getFullYear(),month=d.getMonth();var el=document.createElement("div");el.className="month";var title=document.createElement("h4");title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});el.appendChild(title);var days=document.createElement("div");days.className="days";["L","M","M","G","V","S","D"].forEach(function(x){var h=document.createElement("div");h.className="day head";h.textContent=x;days.appendChild(h)});var first=(new Date(year,month,1).getDay()+6)%7;for(var e=0;e<first;e++){var q=document.createElement("div");q.className="day empty";days.appendChild(q)}var total=new Date(year,month+1,0).getDate();for(var day=1;day<=total;day++){var cell=document.createElement("div");var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");cell.className="day"+(isBusy(ds)?" busy":"");cell.textContent=day;days.appendChild(cell)}el.appendChild(days);wrap.appendChild(el)}}
+async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowRight")lbMove(1);if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowLeft")lbMove(-1)});
+mountApartmentSliders();initGallery();
+</script>
+</body>
 </html>
