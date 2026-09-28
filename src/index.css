@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;0,600;0,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Mobile/iOS-friendly base + prevents layout jumps on iPhone/iPad */
+:root {
+  --cream: #F5E6C8;
+  --sienna: #A0522D;
+  --sage: #B2AC88;
+  --brown: #5C4033;
+  --paper: #FDF8F0;
+  --paper-dark: #F2E8D5;
+
+  /* safe-area for iPhone notch / home indicator */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+html {
+  -webkit-text-size-adjust: 100%; /* stops iOS from auto-resizing fonts */
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--brown);
+  background-color: var(--paper);
+  font-family: 'Crimson Text', serif;
+
+  /* Better font rendering on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Avoid horizontal scrolling on small screens */
+  overflow-x: hidden;
+
+  /* notch-friendly padding (optional but helpful) */
+  padding-top: var(--safe-top);
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent long words/URLs from breaking layout on mobile */
+* {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Better touch interactions on iOS */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  touch-action: manipulation;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Script font utility */
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* ✅ Paper Texture Utility (light) */
+.bg-paper-texture {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.02)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+/* ✅ Paper Texture Utility (dark) */
+.bg-paper-texture-dark {
+  background-color: var(--cream);
+  background-image:
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(160, 82, 45, 0.05)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+/* ✅ Vintage Photo/Card Effect (mobile-safe hover) */
+.vintage-card {
+  box-shadow:
+    2px 2px 0 rgba(0,0,0,0.05),
+    4px 4px 10px rgba(92, 64, 51, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Only apply hover effects on devices that actually have hover (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .vintage-card:hover {
+    transform: translateY(-5px) rotate(0deg) !important;
+    box-shadow:
+      4px 4px 0 rgba(0,0,0,0.05),
+      8px 8px 20px rgba(92, 64, 51, 0.2);
+    z-index: 10;
+  }
+}
+
+/* On touch devices, keep it stable (no jumpy hover state) */
+@media (hover: none) and (pointer: coarse) {
+  .vintage-card {
+    transition: none;
+  }
+}
+
+/* ✅ Reduce motion for accessibility + iOS perf */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hand-drawn border animation */
+@keyframes draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ✅ Utility: mobile-friendly full height sections (iOS Safari address bar) */
+.min-h-screen-ios {
+  min-height: 100vh;
+}
+@supports (height: 100dvh) {
+  .min-h-screen-ios {
+    min-height: 100dvh;
+  }
+}
+
+/* ✅ Optional: avoid iOS input zoom (use 16px+ on inputs) */
+input, textarea, select {
+  font-size: 16px;
+}
+/* SEO hidden link (visibile a Google, invisibile agli utenti) */
+.seo-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
