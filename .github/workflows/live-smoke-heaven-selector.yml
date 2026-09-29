@@ -1,0 +1,24 @@
+name: Live smoke Heaven selector
+
+on:
+  push:
+    branches: [heaven-selector-live-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public Heaven selector
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://wa-ca-chat-gpt.vercel.app/heaven-select.html?_=$(date +%s)"
+          code="$(curl -L --silent --show-error --max-time 20 -o /tmp/page.html -w '%{http_code}' "$url")"
+          echo "HTTP $code"
+          test "$code" = "200"
+          grep -q 'Scegli le foto Heaven' /tmp/page.html
+          test "$(grep -o 'type="checkbox"' /tmp/page.html | wc -l)" -eq 10
+          echo "Heaven selector page is live"
