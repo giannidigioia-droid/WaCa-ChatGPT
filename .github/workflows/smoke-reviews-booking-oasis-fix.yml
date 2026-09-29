@@ -1,0 +1,33 @@
+name: Smoke reviews Booking and Oasis fixes
+
+on:
+  push:
+    branches: [reviews-booking-oasis-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'class="source source-booking"' dist/index.html
+          ! grep -q 'class="source booking"' dist/index.html
+          grep -q 'Riepilogo valutazioni Booking' dist/index.html
+          grep -q '<b>9,5</b><span>Posizione</span>' dist/index.html
+          grep -q 'v1789651756/Patio_Oasis_HD_gokk7g.png' dist/index.html
+          ! grep -q 'v1779974521/patio_oasis_hq.jpg" alt="Oasis"' dist/index.html
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=fs.readFileSync('dist/index.html','utf8');
+          const scripts=[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
+          fs.writeFileSync('/tmp/site.js',scripts);
+          NODE
+          node --check /tmp/site.js
