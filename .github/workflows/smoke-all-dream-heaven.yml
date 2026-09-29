@@ -1,0 +1,56 @@
+name: Smoke all Dream Heaven photos
+
+on:
+  push:
+    branches: [dream-heaven-all-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",h)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify Dream and Heaven counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          d=re.search(r'dream:\[(.*?)\n \],\n heaven:',h,re.S).group(1)
+          hv=re.search(r'heaven:\[(.*?)\n \],\n oasis:',h,re.S).group(1)
+          du=re.findall(r'https://res\.cloudinary\.com[^"]+',d)
+          hu=re.findall(r'https://res\.cloudinary\.com[^"]+',hv)
+          assert len(du)==14, len(du)
+          assert len(hu)==10, len(hu)
+          assert len(du)==len(set(du))
+          assert len(hu)==len(set(hu))
+          assert 'id="counter-dream">1 / 14<' in h
+          assert 'id="counter-heaven">1 / 10<' in h
+          pathlib.Path("/tmp/urls.txt").write_text("\n".join(sorted(set(du+hu))))
+          print("Dream:",len(du),"Heaven:",len(hu))
+          PY
+
+      - name: Verify all selected Cloudinary URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            test "$code" = "200" || { echo "Image failed ($code): $url"; exit 1; }
+          done < /tmp/urls.txt
