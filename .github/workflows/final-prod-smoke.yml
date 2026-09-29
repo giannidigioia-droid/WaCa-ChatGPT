@@ -1,0 +1,35 @@
+name: Final production smoke
+
+on:
+  push:
+    branches: [final-prod-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production page
+        shell: bash
+        run: |
+          set -euo pipefail
+          html="$(curl --fail --silent --show-error --max-time 20 "https://wa-ca-chat-gpt.vercel.app/?_=$(date +%s)")"
+          echo "$html" | grep -q 'Disponibilità WaCa Calendar'
+          echo "$html" | grep -q 'class="radio-dot"'
+          echo "$html" | grep -q 'id="calendarTitle"'
+          echo "$html" | grep -q 'onclick="changeMonth(-1)"'
+          echo "$html" | grep -q 'onclick="changeMonth(1)"'
+          echo "$html" | grep -q 'function chooseCalendarDate(ds)'
+          echo "$html" | grep -q 'loadAvailability(unit)'
+
+      - name: Verify production calendar APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in dream heaven oasis; do
+            body="$(curl --fail --silent --show-error --max-time 20 "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
+            echo "$body" | jq -e --arg unit "$unit" '.unit == $unit and (.periods | type == "array") and (.periods | length > 0)' >/dev/null
+            echo "$unit periods: $(echo "$body" | jq '.periods | length')"
+          done
