@@ -1,0 +1,23 @@
+name: Smoke Heaven clean JPG
+
+on:
+  push:
+    branches: [heaven-card-jpg-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify clean Heaven JPG
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'v1779980287/patio_heaven_hq_2.jpg' dist/index.html
+          ! grep -q 'Patio_Heaven_ki0yrt.png' dist/index.html
+          grep -q 'data-unit="heaven"' dist/index.html
