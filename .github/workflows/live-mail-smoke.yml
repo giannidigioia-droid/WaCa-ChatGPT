@@ -1,0 +1,30 @@
+name: Live mail smoke test
+
+on:
+  push:
+    branches: [mail-smoke-live]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send real smoke-test email
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"apartment":"Dream - SMOKE TEST","name":"WaCa SMOKE TEST","contact":"smoke-test@villawaca.it","checkin":"2026-12-01","checkout":"2026-12-06","adults":"2","children":"0"}'
+          code="$(curl --silent --show-error --max-time 30 \
+            -o /tmp/response.json \
+            -w '%{http_code}' \
+            -X POST 'https://wa-ca-chat-gpt.vercel.app/api/contact' \
+            -H 'Content-Type: application/json' \
+            --data "$payload")"
+          echo "HTTP $code"
+          cat /tmp/response.json
+          echo
+          test "$code" = "200"
+          jq -e '.ok == true and (.id | type == "string") and (.id | length > 0)' /tmp/response.json >/dev/null
+          echo "MAIL_SMOKE_SUCCESS id=$(jq -r '.id' /tmp/response.json)"
