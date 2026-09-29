@@ -1,0 +1,142 @@
+<!doctype html><html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock Recensioni · WaCa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1ede4;--ink:#183126;--muted:#6d756e;--line:#d8d3c9;--white:#fbfaf6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+.wrap{max-width:1240px;margin:auto;padding:64px 28px 100px}
+.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:14px}
+h1{font:500 clamp(54px,7vw,98px)/.88 "Cormorant Garamond",serif;margin:0;max-width:800px}
+.intro{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end}
+.score{border-left:1px solid var(--line);padding-left:34px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.score strong{font:500 72px/1 "Cormorant Garamond",serif}.score b{display:block;font-size:15px}.score span{font-size:12px;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:42px 0 28px}
+.metric{background:rgba(255,255,255,.45);padding:16px;border:1px solid var(--line)}.metric b{font-size:20px}.metric span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:4px}
+.toolbar{display:flex;gap:8px;margin:0 0 26px;flex-wrap:wrap}.toolbar button{border:1px solid var(--line);background:transparent;padding:10px 16px;border-radius:999px;cursor:pointer;color:var(--ink)}.toolbar button.active{background:var(--ink);color:white;border-color:var(--ink)}
+.grid{columns:3 300px;column-gap:14px}.review-card{break-inside:avoid;background:var(--white);border:1px solid var(--line);padding:22px;margin:0 0 14px;display:inline-block;width:100%}
+.review-top{display:flex;justify-content:space-between;align-items:center}.source{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 9px;background:#eef1ed}.source.booking{background:#eaf0fa}.source.airbnb{background:#f8ecec}.stars{font-size:11px;letter-spacing:.08em}
+blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28px}
+.who{display:flex;gap:10px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-weight:600}.who b{font-size:13px}.who span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.more{display:block;margin:34px auto 0;border:1px solid var(--ink);background:transparent;padding:13px 22px;cursor:pointer}
+.note{text-align:center;font-size:11px;color:var(--muted);margin-top:18px}
+.hidden{display:none!important}
+@media(max-width:760px){.intro{grid-template-columns:1fr}.score{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.metrics{grid-template-columns:repeat(2,1fr)}.grid{columns:1}}
+</style></head><body><main class="wrap">
+<div class="eyebrow">PAROLE DEGLI OSPITI · MOCK</div>
+<div class="intro"><div><h1>Chi arriva,<br><em>vuole tornare.</em></h1></div>
+<div class="score"><strong>9,6</strong><div><b>Eccezionale su Booking</b><span>13 recensioni · Staff 10/10</span></div></div></div>
+<div class="metrics">
+<div class="metric"><b>10</b><span>Staff</span></div>
+<div class="metric"><b>9,8</b><span>Comfort</span></div>
+<div class="metric"><b>9,6</b><span>Pulizia</span></div>
+<div class="metric"><b>9,2</b><span>Servizi</span></div>
+<div class="metric"><b>8,8</b><span>Posizione</span></div>
+</div>
+<div class="toolbar"><button class="active" data-filter="all">Tutte · 19</button><button data-filter="Booking">Booking</button><button data-filter="Airbnb">Airbnb</button></div>
+<section class="grid" id="grid">
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Un soggiorno immerso negli ulivi, ideale per staccare dalla folla e vivere la natura pugliese in totale relax.”</blockquote>
+  <div class="who"><div class="avatar">P</div><div><b>Piotr</b><span>Polonia · 7 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Struttura molto curata e confortevole, perfetta per una settimana di vero relax. Proprietari gentili e accoglienti.”</blockquote>
+  <div class="who"><div class="avatar">F</div><div><b>Francesca</b><span>Italia · 7 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Alloggio molto piacevole in un contesto tranquillo e rilassante.”</blockquote>
+  <div class="who"><div class="avatar">D</div><div><b>Dong-Min</b><span>Corea · 2 notti · Coppia</span></div></div>
+</article>
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Host estremamente accoglienti, attenti e sempre disponibili con consigli e risposte rapide.”</blockquote>
+  <div class="who"><div class="avatar">D</div><div><b>Dilan</b><span>Italia · 5 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Casa fedele alle foto, completa di servizi, con piscina e giardino molto curati e una posizione strategica.”</blockquote>
+  <div class="who"><div class="avatar">P</div><div><b>Pasquale</b><span>Italia · 3 notti · Coppia</span></div></div>
+</article>
+<article class="review-card" data-source="Airbnb">
+  <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Ottima base per esplorare la Puglia: camere moderne, pulite, ben attrezzate e una piscina molto apprezzata dalla famiglia.”</blockquote>
+  <div class="who"><div class="avatar">R</div><div><b>Riina</b><span>Finlandia · 7 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Atmosfera molto tranquilla tra gli ulivi, terrazza affacciata sulla piscina e ambienti mantenuti con grande cura.”</blockquote>
+  <div class="who"><div class="avatar">M</div><div><b>Maja</b><span>Paesi Bassi · 5 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Soggiorno molto piacevole: tranquillità, pulizia e posizione sono stati particolarmente apprezzati.”</blockquote>
+  <div class="who"><div class="avatar">C</div><div><b>Christelle</b><span>Belgio · 9 notti · Coppia</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Una vera sensazione di pace e connessione con la natura, accompagnata dalla grande cordialità dei proprietari.”</blockquote>
+  <div class="who"><div class="avatar">C</div><div><b>Colamonico</b><span>Italia · 3 notti · Famiglia</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Grande cura dei dettagli, interni ed esterni ben tenuti, ospitalità professionale e atmosfera autentica.”</blockquote>
+  <div class="who"><div class="avatar">N</div><div><b>Nerina</b><span>Italia · 3 notti · Coppia</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Posizione comoda per costa, Monopoli e Polignano, ma allo stesso tempo molto tranquilla tra gli ulivi. Ottimi consigli locali da Lara.”</blockquote>
+  <div class="who"><div class="avatar">A</div><div><b>Andre</b><span>Regno Unito</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Villa molto pulita e moderna, area esterna piacevole e posizione comoda per visitare diverse città della zona.”</blockquote>
+  <div class="who"><div class="avatar">K</div><div><b>Kelly</b><span>Paesi Bassi</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Villa piacevole nella campagna tra gli ulivi, con piscina condivisa e ottimi spazi esterni per esplorare la regione.”</blockquote>
+  <div class="who"><div class="avatar">J</div><div><b>Justine</b><span>Regno Unito</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Soggiorno molto riuscito in un contesto eccezionale tra gli ulivi, appartamento nuovo e ben attrezzato, ottima base per visitare la Puglia.”</blockquote>
+  <div class="who"><div class="avatar">E</div><div><b>Elodie</b><span>Francia · 12 giorni</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Casa bella e comoda per visitare il nord della Puglia, spazi comuni impeccabili e piscina molto suggestiva tra gli ulivi.”</blockquote>
+  <div class="who"><div class="avatar">A</div><div><b>Ainara</b><span>Spagna</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Zona tranquilla, bella piscina e numerose mete facilmente raggiungibili in auto.”</blockquote>
+  <div class="who"><div class="avatar">C</div><div><b>Christine</b><span>Germania</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Villa accogliente, molto pulita e ben organizzata, immersa nella tranquillità della campagna pugliese.”</blockquote>
+  <div class="who"><div class="avatar">A</div><div><b>Anna</b><span>Italia · 4 giorni</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Alloggio pulito e confortevole, ottima posizione per esplorare la zona e comunicazione eccellente con Lara.”</blockquote>
+  <div class="who"><div class="avatar">M</div><div><b>Miloš</b><span>Repubblica Ceca</span></div></div>
+</article>
+<article class="review-card" data-source="Booking">
+  <div class="review-top"><span class="source booking">Booking</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Contesto magnifico tra gli ulivi, grande tranquillità, piscina piacevole e posizione comoda per le principali attrazioni.”</blockquote>
+  <div class="who"><div class="avatar">M</div><div><b>Mickael</b><span>Francia · 1 settimana</span></div></div>
+</article></section>
+<button class="more" id="more">Mostra tutte le recensioni</button>
+<p class="note">Mock: testi sintetizzati per uniformare lingua e lunghezza. Nella versione finale possiamo mantenere originale + traduzione.</p>
+</main>
+<script>
+const cards=[...document.querySelectorAll('.review-card')],buttons=[...document.querySelectorAll('.toolbar button')],more=document.getElementById('more');let expanded=false,filter='all';
+function render(){let shown=0;cards.forEach(c=>{const ok=filter==='all'||c.dataset.source===filter;if(!ok){c.classList.add('hidden');return}shown++;c.classList.toggle('hidden',!expanded&&shown>9)});more.style.display=(filter==='all'&&!expanded)?'block':'none'}
+buttons.forEach(b=>b.onclick=()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;expanded=filter!=='all';render()});
+more.onclick=()=>{expanded=true;render()};render();
+</script></body></html>
