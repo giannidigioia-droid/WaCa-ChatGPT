@@ -10,23 +10,23 @@
 .eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:14px}
 h1{font:500 clamp(54px,7vw,98px)/.88 "Cormorant Garamond",serif;margin:0;max-width:800px}
 .intro{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end}
-.score-wrap{display:grid;gap:14px}.score{border-left:1px solid var(--line);padding-left:34px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}.google-score{padding-top:10px;padding-bottom:10px;background:rgba(255,255,255,.35)}
+.score-wrap{display:grid;gap:14px}.score{border-left:1px solid var(--line);padding-left:34px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
 .score strong{font:500 72px/1 "Cormorant Garamond",serif}.score b{display:block;font-size:15px}.score span{font-size:12px;color:var(--muted)}
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:42px 0 28px}
 .metric{background:rgba(255,255,255,.45);padding:16px;border:1px solid var(--line)}.metric b{font-size:20px}.metric span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:4px}
 .toolbar{display:flex;gap:8px;margin:0 0 26px;flex-wrap:wrap}.toolbar button{border:1px solid var(--line);background:transparent;padding:10px 16px;border-radius:999px;cursor:pointer;color:var(--ink)}.toolbar button.active{background:var(--ink);color:white;border-color:var(--ink)}
 .grid{columns:3 300px;column-gap:14px}.review-card{break-inside:avoid;background:var(--white);border:1px solid var(--line);padding:22px;margin:0 0 14px;display:inline-block;width:100%}
-.review-top{display:flex;justify-content:space-between;align-items:center}.source{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 9px;background:#eef1ed}.source.booking{background:#eaf0fa}.source.airbnb{background:#f8ecec}.source.google{background:#fff4d6}.google-summary{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--line);background:var(--white);padding:18px 20px;margin:0 0 18px}.google-summary>div:first-child{display:flex;align-items:center;gap:12px}.google-summary b{font-size:22px}.google-summary span{font-size:12px;color:var(--muted)}.g-stars{letter-spacing:.08em;font-size:18px}.google-summary p{margin:0;color:var(--muted);font-size:12px}.stars{font-size:11px;letter-spacing:.08em}
+.review-top{display:flex;justify-content:space-between;align-items:center}.source{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 9px;background:#eef1ed}.source.booking{background:#eaf0fa}.source.airbnb{background:#f8ecec}.source.google{background:#fff4d6}.stars{font-size:11px;letter-spacing:.08em}
 blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28px}
 .who{display:flex;gap:10px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-weight:600}.who b{font-size:13px}.who span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
 
 .note{text-align:center;font-size:11px;color:var(--muted);margin-top:18px}
 .hidden{display:none!important}
-@media(max-width:760px){.intro{grid-template-columns:1fr}.score{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.metrics{grid-template-columns:repeat(2,1fr)}.grid{columns:1}.google-summary{align-items:flex-start;flex-direction:column}}
+@media(max-width:760px){.intro{grid-template-columns:1fr}.score{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.metrics{grid-template-columns:repeat(2,1fr)}.grid{columns:1}}
 </style></head><body><main class="wrap">
 <div class="eyebrow">PAROLE DEGLI OSPITI · MOCK</div>
 <div class="intro"><div><h1>Chi arriva,<br><em>vuole tornare.</em></h1></div>
-<div class="score-wrap"><div class="score"><strong>9,6</strong><div><b>Eccezionale su Booking</b><span>13 recensioni · Staff 10/10</span></div></div><div class="score google-score"><strong>5,0</strong><div><b>Perfetto su Google</b><span>22 recensioni · ★★★★★</span></div></div></div></div>
+<div class="score-wrap"><div class="score"><strong>9,6</strong><div><b>Eccezionale su Booking</b><span>13 recensioni · Staff 10/10</span></div></div></div></div>
 <div class="metrics">
 <div class="metric"><b>10</b><span>Staff</span></div>
 <div class="metric"><b>9,8</b><span>Comfort</span></div>
@@ -34,8 +34,33 @@ blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28
 <div class="metric"><b>9,2</b><span>Servizi</span></div>
 <div class="metric"><b>9,5</b><span>Posizione</span></div>
 </div>
-<div class="toolbar"><button class="active" data-filter="all">Tutte · 22</button><button data-filter="Booking">Booking</button><button data-filter="Airbnb">Airbnb</button><button data-filter="Google">Google · 22</button></div>
-<div class="google-summary" data-source="Google"><div><span class="source google">Google</span><b>5,0 / 5</b><span>22 recensioni</span></div><div class="g-stars">★★★★★</div><p>Valutazione Google complessiva di WaCa - Apulian Villa. <a href="https://www.google.com/maps/place/WaCa+-+Apulian+Villa/@40.8682429,17.3241775,17z/data=!3m1!4b1!4m9!3m8!1s0x13464b026914d4ed:0x3ff4af9b3f47ba2f!5m2!4m1!1i2!8m2!3d40.8682429!4d17.3241775!16s%2Fg%2F11y08lv1jp?entry=ttu" target="_blank" rel="noopener">Leggi le 22 recensioni Google ↗</a></p></div><section class="grid" id="grid">
+<div class="toolbar"><button class="active" data-filter="all">Tutte · 27</button><button data-filter="Booking">Booking</button><button data-filter="Airbnb">Airbnb</button><button data-filter="Google">Google · 5</button></div>
+<section class="grid" id="grid">
+<article class="review-card" data-source="Google">
+  <div class="review-top"><span class="source google">Google</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Meravigliosa villa con piscina immersa negli ulivi e nella pace della campagna di Monopoli. Lara molto attenta, gentile e disponibile.”</blockquote>
+  <div class="who"><div class="avatar">G</div><div><b>Gianluca Montefrancesco</b><span>Google · 5★</span></div></div>
+</article>
+<article class="review-card" data-source="Google">
+  <div class="review-top"><span class="source google">Google</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Incantevole villa immersa nella natura vicino Monopoli. Posizione perfetta per Monopoli, Capitolo e Savelletri. Proprietari gentili e disponibili.”</blockquote>
+  <div class="who"><div class="avatar">S</div><div><b>Stefano Pennelli</b><span>Google · 5★</span></div></div>
+</article>
+<article class="review-card" data-source="Google">
+  <div class="review-top"><span class="source google">Google</span><span class="stars">★★★★★</span></div>
+  <blockquote>“La villa è in mezzo a una distesa di ulivi. Struttura nuovissima, curata nei dettagli e con tutti i servizi perfettamente funzionanti.”</blockquote>
+  <div class="who"><div class="avatar">F</div><div><b>Federico Losappio</b><span>Google · 5★</span></div></div>
+</article>
+<article class="review-card" data-source="Google">
+  <div class="review-top"><span class="source google">Google</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Un’oasi di quiete esclusiva, dove ogni spazio è pensato per offrire bellezza e comfort. Lara e Gianni accolgono con calore autentico.”</blockquote>
+  <div class="who"><div class="avatar">F</div><div><b>Fulvia Pizzi</b><span>Google · 5★</span></div></div>
+</article>
+<article class="review-card" data-source="Google">
+  <div class="review-top"><span class="source google">Google</span><span class="stars">★★★★★</span></div>
+  <blockquote>“Un posto davvero tranquillo tra ulivi secolari. Appartamento spazioso, ben attrezzato e dotato di ogni comfort.”</blockquote>
+  <div class="who"><div class="avatar">M</div><div><b>Massimo Tinelli</b><span>Google · 5★</span></div></div>
+</article>
 <article class="review-card" data-source="Airbnb">
   <div class="review-top"><span class="source airbnb">Airbnb</span><span class="stars">★★★★★</span></div>
   <blockquote>“Una splendida casa vacanze con un incantevole giardino e una piscina. Ha soddisfatto perfettamente le esigenze della nostra famiglia di cinque persone. Tuttavia, l'accesso alla casa avviene tramite una strada sterrata e si richiede cautela.”</blockquote>
@@ -147,11 +172,10 @@ blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28
   <div class="who"><div class="avatar">M</div><div><b>Mickael</b><span>Francia · 1 settimana</span></div></div>
 </article></section>
 
-<p class="note">Tutte le recensioni disponibili sono mostrate integralmente in questa vista.</p>
+<p class="note">Sono mostrate in chiaro tutte le recensioni testuali raccolte da Booking, Airbnb e Google.</p>
 </main>
 <script>
 const cards=[...document.querySelectorAll('.review-card')],buttons=[...document.querySelectorAll('.toolbar button')];let filter='all';
-function render(){const gs=document.querySelector('.google-summary');gs.classList.toggle('hidden',!(filter==='all'||filter==='Google'));cards.forEach(c=>{const ok=filter==='all'||c.dataset.source===filter;c.classList.toggle('hidden',!ok)})}
-buttons.forEach(b=>b.onclick=()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;expanded=filter!=='all';render()});
-more.onclick=()=>{expanded=true;render()};render();
+function render(){cards.forEach(c=>{const ok=filter==='all'||c.dataset.source===filter;c.classList.toggle('hidden',!ok)})}
+buttons.forEach(b=>b.onclick=()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()});render();
 </script></body></html>
