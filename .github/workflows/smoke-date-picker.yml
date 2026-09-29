@@ -1,0 +1,42 @@
+name: Smoke test selectable calendar
+
+on:
+  push:
+    branches: [calendar-date-picker-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: npm run build
+
+      - name: Extract and syntax-check inline JavaScript
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, pathlib
+          html=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",html)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify selectable-calendar behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'function chooseCalendarDate(ds)' index.html
+          grep -q 'cell.type="button"' index.html
+          grep -q 'cell.disabled=busy||past||!calendarAvailable' index.html
+          grep -q 'document.getElementById("checkin").value=selectedCheckin' index.html
+          grep -q 'document.getElementById("checkout").value=selectedCheckout' index.html
+          grep -q 'rangeHasBusy(selectedCheckin,ds)' index.html
+          grep -q 'selectedCheckin=""' index.html
+          grep -q 'selectedCheckout=""' index.html
+          grep -q 'loadAvailability(unit)' index.html
