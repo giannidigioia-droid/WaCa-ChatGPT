@@ -1,0 +1,24 @@
+name: Smoke final tree logo
+
+on:
+  push:
+    branches: [header-tree-logo-final-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify logo styling
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q 'width:58px;height:58px' dist/index.html
+          grep -q 'mix-blend-mode:multiply' dist/index.html
+          grep -q 'transform:scale(1.48)' dist/index.html
+          grep -q 'background:var(--bg)' dist/index.html
+          grep -q 'A50CFB91-52F7-4AAB-A403-9EDC0BEA34A8_p3wrep.png' dist/index.html
