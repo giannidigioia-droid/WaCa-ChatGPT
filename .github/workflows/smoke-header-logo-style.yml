@@ -1,0 +1,23 @@
+name: Smoke header logo style
+
+on:
+  push:
+    branches: [header-logo-style-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify header logo style
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q 'width:46px;height:46px' dist/index.html
+          grep -q 'mix-blend-mode:multiply' dist/index.html
+          grep -q 'background:transparent' dist/index.html
+          grep -q 'class="brand-logo"' dist/index.html
