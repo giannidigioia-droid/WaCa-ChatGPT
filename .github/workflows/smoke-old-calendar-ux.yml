@@ -1,0 +1,45 @@
+name: Smoke old calendar UX
+
+on:
+  push:
+    branches: [old-calendar-ux-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: npm run build
+
+      - name: JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, pathlib
+          html=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",html)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify booking UX
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'class="choice" data-unit="oasis"' index.html
+          grep -q 'class="choice" data-unit="heaven"' index.html
+          grep -q 'class="choice" data-unit="dream"' index.html
+          grep -q 'class="choice" data-unit="villa"' index.html
+          grep -q 'class="radio-dot"' index.html
+          grep -q 'id="calendarTitle"' index.html
+          grep -q 'onclick="changeMonth(-1)"' index.html
+          grep -q 'onclick="changeMonth(1)"' index.html
+          grep -q 'function chooseCalendarDate(ds)' index.html
+          grep -q 'nightsBetween(selectedCheckin,ds)<5' index.html
+          grep -q 'cell.disabled=busy||past||!calendarAvailable' index.html
+          grep -q 'loadAvailability(unit)' index.html
