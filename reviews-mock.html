@@ -19,7 +19,7 @@ h1{font:500 clamp(54px,7vw,98px)/.88 "Cormorant Garamond",serif;margin:0;max-wid
 .review-top{display:flex;justify-content:space-between;align-items:center}.source{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 9px;background:#eef1ed}.source.booking{background:#eaf0fa}.source.airbnb{background:#f8ecec}.source.google{background:#fff4d6}.google-summary{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--line);background:var(--white);padding:18px 20px;margin:0 0 18px}.google-summary>div:first-child{display:flex;align-items:center;gap:12px}.google-summary b{font-size:22px}.google-summary span{font-size:12px;color:var(--muted)}.g-stars{letter-spacing:.08em;font-size:18px}.google-summary p{margin:0;color:var(--muted);font-size:12px}.stars{font-size:11px;letter-spacing:.08em}
 blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28px}
 .who{display:flex;gap:10px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-weight:600}.who b{font-size:13px}.who span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
-.more{display:block;margin:34px auto 0;border:1px solid var(--ink);background:transparent;padding:13px 22px;cursor:pointer}
+
 .note{text-align:center;font-size:11px;color:var(--muted);margin-top:18px}
 .hidden{display:none!important}
 @media(max-width:760px){.intro{grid-template-columns:1fr}.score{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.metrics{grid-template-columns:repeat(2,1fr)}.grid{columns:1}.google-summary{align-items:flex-start;flex-direction:column}}
@@ -146,12 +146,12 @@ blockquote{font:italic 500 24px/1.28 "Cormorant Garamond",serif;margin:24px 0 28
   <blockquote>“Contesto magnifico tra gli ulivi, grande tranquillità, piscina piacevole e posizione comoda per le principali attrazioni.”</blockquote>
   <div class="who"><div class="avatar">M</div><div><b>Mickael</b><span>Francia · 1 settimana</span></div></div>
 </article></section>
-<button class="more" id="more">Mostra tutte le recensioni</button>
-<p class="note">Mock: testi sintetizzati per uniformare lingua e lunghezza. Nella versione finale possiamo mantenere originale + traduzione.</p>
+
+<p class="note">Tutte le recensioni disponibili sono mostrate integralmente in questa vista.</p>
 </main>
 <script>
-const cards=[...document.querySelectorAll('.review-card')],buttons=[...document.querySelectorAll('.toolbar button')],more=document.getElementById('more');let expanded=false,filter='all';
-function render(){let shown=0;const gs=document.querySelector('.google-summary');gs.classList.toggle('hidden',!(filter==='all'||filter==='Google'));cards.forEach(c=>{const ok=filter==='all'||c.dataset.source===filter;if(!ok){c.classList.add('hidden');return}shown++;c.classList.toggle('hidden',!expanded&&shown>9)});more.style.display=(filter==='all'&&!expanded)?'block':'none'}
+const cards=[...document.querySelectorAll('.review-card')],buttons=[...document.querySelectorAll('.toolbar button')];let filter='all';
+function render(){const gs=document.querySelector('.google-summary');gs.classList.toggle('hidden',!(filter==='all'||filter==='Google'));cards.forEach(c=>{const ok=filter==='all'||c.dataset.source===filter;c.classList.toggle('hidden',!ok)})}
 buttons.forEach(b=>b.onclick=()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;expanded=filter!=='all';render()});
 more.onclick=()=>{expanded=true;render()};render();
 </script></body></html>
