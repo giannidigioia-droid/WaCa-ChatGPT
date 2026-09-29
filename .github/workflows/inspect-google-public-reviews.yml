@@ -1,0 +1,38 @@
+name: Inspect public Google reviews
+
+on:
+  push:
+    branches: [inspect-google-public-reviews]
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Google Maps public page
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://www.google.com/maps/place/WaCa+-+Apulian+Villa/@40.8682429,17.3241775,17z/data=!3m1!4b1!4m9!3m8!1s0x13464b026914d4ed:0x3ff4af9b3f47ba2f!5m2!4m1!1i2!8m2!3d40.8682429!4d17.3241775!16s%2Fg%2F11y08lv1jp?entry=ttu'
+          curl -L --compressed --silent --show-error --max-time 30             -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36'             "$url" -o /tmp/maps.html
+          echo "BYTES $(wc -c </tmp/maps.html)"
+          python - <<'PY'
+          from pathlib import Path
+          import re, html
+          s=Path('/tmp/maps.html').read_text(errors='ignore')
+          print('HAS_WACA', 'WaCa' in s)
+          print('HAS_REVIEWS', 'reviews' in s.lower() or 'recensioni' in s.lower())
+          for needle in ['WaCa - Apulian Villa','22 recensioni','22 reviews','Google reviews','recensione']:
+              p=s.lower().find(needle.lower())
+              if p>=0:
+                  print('\n===',needle,'===\n')
+                  print(html.unescape(s[max(0,p-2500):p+12000]))
+          # extract likely human-visible strings around rating/reviews
+          vals=re.findall(r'"([^"\\]{20,500})"',s)
+          vals=[html.unescape(v) for v in vals if any(k in v.lower() for k in ['waca','review','recension','pool','villa','host','olive','piscina','ulivi'])]
+          print('\nLIKELY_STRINGS')
+          for v in vals[:200]:
+              print(v)
+          PY
