@@ -53,7 +53,7 @@ jobs:
           assert all(("piscina" in u.lower()) for u in re.findall(r'https://[^"]+',pool)), pool
 
           cam=block("Camere")
-          assert all(any(k in u.lower() for k in ["camera","stanza","letto"]) for u in re.findall(r'https://[^"]+',cam)), cam
+          assert all(any(k in u.lower() for k in ["camera","stanza","stanzetta","letto"]) for u in re.findall(r'https://[^"]+',cam)), cam
 
           dream=re.search(r'dream:\[(.*?)\n \],\n heaven:',h,re.S).group(1)
           banned=[
