@@ -1,0 +1,36 @@
+name: Smoke Google inline reviews
+
+on:
+  push:
+    branches: [reviews-google-inline-final-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify inline Google reviews
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/reviews-mock.html
+          ! grep -q 'Perfetto su Google' dist/reviews-mock.html
+          ! grep -q 'google-summary' dist/reviews-mock.html
+          grep -q 'Gianluca Montefrancesco' dist/reviews-mock.html
+          grep -q 'Stefano Pennelli' dist/reviews-mock.html
+          grep -q 'Federico Losappio' dist/reviews-mock.html
+          grep -q 'Fulvia Pizzi' dist/reviews-mock.html
+          grep -q 'Massimo Tinelli' dist/reviews-mock.html
+          grep -q 'Tutte · 27' dist/reviews-mock.html
+          grep -q 'Google · 5' dist/reviews-mock.html
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=fs.readFileSync('dist/reviews-mock.html','utf8');
+          const scripts=[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
+          fs.writeFileSync('/tmp/reviews.js',scripts);
+          NODE
+          node --check /tmp/reviews.js
