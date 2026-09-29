@@ -1,0 +1,68 @@
+name: Smoke photo dedupe
+
+on:
+  push:
+    branches: [photo-dedupe-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",h)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify no duplicate public IDs within each gallery/category
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          def urls(block):
+              return re.findall(r'https://res\.cloudinary\.com/[^"]+/v\d+/([^"\n]+)',block)
+          m=re.search(r'const apartments=\{(.*?)\};\nconst galleryData=',h,re.S)
+          assert m
+          for name in ["dream","heaven","oasis"]:
+              mm=re.search(rf'{name}:\[(.*?)\n \]',m.group(1),re.S)
+              arr=urls(mm.group(1))
+              assert len(arr)==len(set(arr)), f"duplicate in {name}: {arr}"
+          g=re.search(r'const galleryData=\{(.*?)\};\nconst sliderState=',h,re.S)
+          assert g
+          for name in ["Piscina","Patii","Esterni","Camere","Interni"]:
+              mm=re.search(rf' {name}:\[(.*?)\n \]',g.group(1),re.S)
+              arr=urls(mm.group(1))
+              assert len(arr)==len(set(arr)), f"duplicate in {name}: {arr}"
+          assert "copy_of_piscinaluceceleste_dtz2yq" not in h
+          assert "patio_heaven_hq_2" not in h
+          print("No duplicate public IDs and known duplicates removed")
+          PY
+
+      - name: Verify Cloudinary URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/urls.txt
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          for u in sorted(set(re.findall(r'https://res\.cloudinary\.com/dfu9nzn8r/image/upload/[^"\' )]+',h))):
+              print(u)
+          PY
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            test "$code" = "200" || { echo "Image failed ($code): $url"; exit 1; }
+          done < /tmp/urls.txt
