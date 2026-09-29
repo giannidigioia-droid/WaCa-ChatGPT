@@ -1,0 +1,25 @@
+name: Smoke exact WaCa logo
+
+on:
+  push:
+    branches: [exact-logo-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify exact logo
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q 'waca_tree_logo_exact_20260929.webp' dist/index.html
+          ! grep -q 'A50CFB91-52F7-4AAB-A403-9EDC0BEA34A8_p3wrep.png' dist/index.html
+          grep -q 'Apulian Villa - Monopoli' dist/index.html
+          logo="https://res.cloudinary.com/dfu9nzn8r/image/upload/v1790681704/waca_tree_logo_exact_20260929.webp"
+          code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$logo")"
+          test "$code" = "200"
