@@ -1,0 +1,23 @@
+name: Smoke exact Heaven asset
+
+on:
+  push:
+    branches: [heaven-exact-asset-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify exact asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'https://res.cloudinary.com/dfu9nzn8r/image/upload/v1789651755/Patio_Heaven_ki0yrt.png' dist/index.html
+          grep -q 'data-unit="heaven"' dist/index.html
+          grep -q 'object-fit:cover' dist/index.html
