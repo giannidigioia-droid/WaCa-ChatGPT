@@ -1,0 +1,29 @@
+name: Smoke Heaven hard crop
+
+on:
+  push:
+    branches: [heaven-card-hardcrop-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify hard crop
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'c_crop,g_north,w_1000,h_720,x_43,y_55' dist/index.html
+          grep -q 'Patio_Heaven_ki0yrt.png' dist/index.html
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=fs.readFileSync('dist/index.html','utf8');
+          const scripts=[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
+          fs.writeFileSync('/tmp/site.js',scripts);
+          NODE
+          node --check /tmp/site.js
