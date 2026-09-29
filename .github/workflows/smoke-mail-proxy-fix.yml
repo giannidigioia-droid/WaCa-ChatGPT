@@ -1,0 +1,23 @@
+name: Smoke mail proxy fix
+
+on:
+  push:
+    branches: [mail-proxy-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate API code
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check api/contact.js
+          grep -q 'wac-chatgpt.vercel.app/api/contact' api/contact.js
+          ! grep -q 'RESEND_API_KEY' api/contact.js
+          grep -q 'contactInfo' api/contact.js
+          grep -q 'nights' api/contact.js
