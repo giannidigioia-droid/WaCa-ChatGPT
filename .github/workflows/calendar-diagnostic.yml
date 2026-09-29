@@ -1,0 +1,22 @@
+name: Calendar diagnostic
+
+on:
+  push:
+    branches: [calendar-diagnostic]
+
+permissions:
+  contents: read
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump calendar summaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in dream heaven oasis; do
+            echo "=== $unit ==="
+            body="$(curl --fail --silent --show-error "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
+            echo "$body" | jq '{unit,label,count:(.periods|length),periods:.periods}'
+          done
