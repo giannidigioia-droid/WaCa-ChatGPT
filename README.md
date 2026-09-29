@@ -20,3 +20,6 @@ Villa intera is derived by merging the three calendars.
 ## Email
 Required: `RESEND_API_KEY`  
 Optional: `RESEND_FROM_EMAIL`
+
+
+<!-- Calendar env redeploy marker: 2026-09-29 -->
