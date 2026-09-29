@@ -1,0 +1,24 @@
+name: Smoke reviews Google mock
+
+on:
+  push:
+    branches: [reviews-google-mock-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify Google review summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/reviews-mock.html
+          grep -q '5,0 / 5' dist/reviews-mock.html
+          grep -q '22 recensioni' dist/reviews-mock.html
+          grep -q '<b>9,5</b><span>Posizione</span>' dist/reviews-mock.html
+          grep -q 'Google · 22' dist/reviews-mock.html
