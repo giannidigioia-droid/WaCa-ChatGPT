@@ -1,0 +1,22 @@
+name: Smoke smaller header logo
+
+on:
+  push:
+    branches: [header-logo-smaller-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify smaller logo
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q 'width:44px;height:44px' dist/index.html
+          grep -q 'transform:scale(1.08)' dist/index.html
+          grep -q 'Apulian Villa - Monopoli' dist/index.html
