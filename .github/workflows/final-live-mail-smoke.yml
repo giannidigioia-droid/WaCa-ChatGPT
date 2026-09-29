@@ -1,0 +1,25 @@
+name: Final live mail smoke
+
+on:
+  push:
+    branches: [mail-final-live-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send real email through new production endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"apartment":"dream","name":"WaCa FINAL SMOKE TEST","contact":"smoke-test@villawaca.it","checkin":"2026-12-10","checkout":"2026-12-15","adults":"2","children":"0"}'
+          code="$(curl --silent --show-error --max-time 30             -o /tmp/response.json             -w '%{http_code}'             -X POST 'https://wa-ca-chat-gpt.vercel.app/api/contact'             -H 'Content-Type: application/json'             --data "$payload")"
+          echo "HTTP $code"
+          cat /tmp/response.json
+          echo
+          test "$code" = "200"
+          jq -e '.ok == true and (.id | type == "string") and (.id | length > 0)' /tmp/response.json >/dev/null
+          echo "MAIL_FINAL_SUCCESS id=$(jq -r '.id' /tmp/response.json)"
