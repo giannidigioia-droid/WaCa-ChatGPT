@@ -1,0 +1,29 @@
+name: Smoke transparent booking fix
+
+on:
+  push:
+    branches: [calendar-transparent-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax
+        run: node --check api/calendar.js
+
+      - name: Validate parsing rule
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'STATUS:CANCELLED' api/calendar.js
+          ! grep -q 'TRANSP:TRANSPARENT' api/calendar.js
+
+      - name: Validate known event counts against Google Calendar source
+        shell: bash
+        run: |
+          echo "Expected after fix: Dream 6, Heaven 19, Oasis 17"
