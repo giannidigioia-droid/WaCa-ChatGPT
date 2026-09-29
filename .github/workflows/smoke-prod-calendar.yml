@@ -1,0 +1,24 @@
+name: Smoke production calendar endpoint
+
+on:
+  push:
+    branches: [calendar-prod-endpoint-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test production calendar API
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in dream heaven oasis; do
+            echo "Testing $unit"
+            code="$(curl --silent --show-error --max-time 20 -o /tmp/$unit.json -w '%{http_code}' "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
+            echo "HTTP $code"
+            jq -c '{error,unit,label,count:(.periods|length?)}' /tmp/$unit.json 2>/dev/null || head -c 300 /tmp/$unit.json
+            echo
+          done
