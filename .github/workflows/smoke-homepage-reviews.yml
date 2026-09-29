@@ -1,0 +1,34 @@
+name: Smoke homepage reviews
+
+on:
+  push:
+    branches: [integrate-reviews-home-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify homepage reviews
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'Mostra tutte le recensioni' dist/index.html
+          grep -q 'data-review-filter="Google">Google</button>' dist/index.html
+          ! grep -q 'data-review-filter="Google">Google ·' dist/index.html
+          test "$(grep -o 'data-source="Google"' dist/index.html | wc -l)" -eq 5
+          test "$(grep -o 'data-source="Booking"' dist/index.html | wc -l)" -eq 13
+          test "$(grep -o 'data-source="Airbnb"' dist/index.html | wc -l)" -eq 9
+          test "$(grep -o 'review-hidden' dist/index.html | wc -l)" -ge 22
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=fs.readFileSync('dist/index.html','utf8');
+          const scripts=[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
+          fs.writeFileSync('/tmp/site.js',scripts);
+          NODE
+          node --check /tmp/site.js
