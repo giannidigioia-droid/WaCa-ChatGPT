@@ -1,0 +1,42 @@
+name: Inspect old JS bundles
+
+on:
+  push:
+    branches: [inspect-old-js-bundles]
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch scripts and grep mail logic
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error 'https://wac-chatgpt.vercel.app/' -o /tmp/old.html
+          python - <<'PY'
+          import re
+          h=open('/tmp/old.html',errors='ignore').read()
+          print("SCRIPT_SRCS")
+          for src in re.findall(r'<script[^>]+src=["\']([^"\']+)',h):
+              print(src)
+          print("HTML_HEAD")
+          print(h[:5000])
+          PY
+          python - <<'PY'
+          import re, urllib.parse, subprocess
+          h=open('/tmp/old.html',errors='ignore').read()
+          srcs=re.findall(r'<script[^>]+src=["\']([^"\']+)',h)
+          for i,src in enumerate(srcs):
+              url=urllib.parse.urljoin('https://wac-chatgpt.vercel.app/',src)
+              path=f'/tmp/bundle{i}.js'
+              subprocess.run(['curl','--fail','--silent','--show-error',url,'-o',path],check=True)
+              txt=open(path,errors='ignore').read()
+              for needle in ['api/contact','emailjs','resend','sunsetmonopoli','sendForm','send(']:
+                  p=txt.lower().find(needle.lower())
+                  if p>=0:
+                      print(f'\n=== bundle {i} {url} needle {needle} ===\n')
+                      print(txt[max(0,p-3000):p+6000])
+          PY
