@@ -1,0 +1,25 @@
+name: Smoke Airbnb Google reviews update
+
+on:
+  push:
+    branches: [reviews-airbnb-plus-googlelink-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify reviews update
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/reviews-mock.html
+          grep -q 'Giwrgos' dist/reviews-mock.html
+          grep -q 'Maria Celeste' dist/reviews-mock.html
+          grep -q 'Marta &amp; Lucio' dist/reviews-mock.html
+          grep -q 'Tutte · 22' dist/reviews-mock.html
+          grep -q 'Leggi le 22 recensioni Google' dist/reviews-mock.html
