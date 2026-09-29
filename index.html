@@ -229,8 +229,42 @@ function lbMove(dir,e){if(e)e.stopPropagation();lbIndex=(lbIndex+dir+lbItems.len
 function renderGallery(cat){document.querySelectorAll(".gallery-tabs button").forEach(function(b){b.classList.toggle("active",b.dataset.cat===cat)});var arr=galleryData[cat],grid=document.getElementById("galleryGrid");document.getElementById("galleryCount").textContent=arr.length+" foto";grid.innerHTML="";arr.forEach(function(src,i){var b=document.createElement("button");b.innerHTML='<img src="'+src+'" loading="lazy" alt="WaCa '+cat+'">';b.onclick=function(){openLightboxFrom(arr,i)};grid.appendChild(b)})}
 function initGallery(){var tabs=document.getElementById("galleryTabs");Object.keys(galleryData).forEach(function(cat){var b=document.createElement("button");b.textContent=cat;b.dataset.cat=cat;b.onclick=function(){renderGallery(cat)};tabs.appendChild(b)});renderGallery("Piscina")}
 let busyPeriods=[];
-function selectUnit(unit){document.getElementById("unit").value=unit;document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});loadAvailability(unit)}
-async function loadAvailability(unit){var box=document.getElementById("availability");box.textContent="Aggiornamento calendario in corso…";document.getElementById("calendarWrap").innerHTML="";try{var r=await fetch("/api/calendar?unit="+encodeURIComponent(unit)+"&_="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("calendar");var data=await r.json();busyPeriods=data.periods||[];box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · aggiornato ora";renderCalendars()}catch(err){busyPeriods=[];box.textContent="Calendario temporaneamente non disponibile. Puoi comunque inviare la richiesta.";renderCalendars()}}
+let calendarRequestController=null;
+let calendarRequestSeq=0;
+function selectUnit(unit){
+  document.getElementById("unit").value=unit;
+  document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});
+  loadAvailability(unit);
+}
+async function loadAvailability(unit){
+  var box=document.getElementById("availability");
+  var wrap=document.getElementById("calendarWrap");
+  var requestId=++calendarRequestSeq;
+  if(calendarRequestController)calendarRequestController.abort();
+  calendarRequestController=new AbortController();
+  busyPeriods=[];
+  wrap.innerHTML="";
+  box.textContent="Aggiornamento calendario in corso…";
+  try{
+    var r=await fetch("/api/calendar?unit="+encodeURIComponent(unit)+"&_="+Date.now(),{
+      cache:"no-store",
+      headers:{"Cache-Control":"no-cache, no-store, must-revalidate","Pragma":"no-cache"},
+      signal:calendarRequestController.signal
+    });
+    if(!r.ok)throw new Error("calendar");
+    var data=await r.json();
+    if(requestId!==calendarRequestSeq)return;
+    busyPeriods=Array.isArray(data.periods)?data.periods:[];
+    box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · aggiornato "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    renderCalendars();
+  }catch(err){
+    if(err&&err.name==="AbortError")return;
+    if(requestId!==calendarRequestSeq)return;
+    busyPeriods=[];
+    box.textContent="Calendario temporaneamente non disponibile. Puoi comunque inviare la richiesta.";
+    renderCalendars();
+  }
+}
 function isBusy(dateStr){return busyPeriods.some(function(p){return dateStr>=p.start&&dateStr<p.end})}
 function renderCalendars(){var wrap=document.getElementById("calendarWrap");wrap.innerHTML="";var now=new Date();for(var m=0;m<3;m++){var d=new Date(now.getFullYear(),now.getMonth()+m,1);var year=d.getFullYear(),month=d.getMonth();var el=document.createElement("div");el.className="month";var title=document.createElement("h4");title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});el.appendChild(title);var days=document.createElement("div");days.className="days";["L","M","M","G","V","S","D"].forEach(function(x){var h=document.createElement("div");h.className="day head";h.textContent=x;days.appendChild(h)});var first=(new Date(year,month,1).getDay()+6)%7;for(var e=0;e<first;e++){var q=document.createElement("div");q.className="day empty";days.appendChild(q)}var total=new Date(year,month+1,0).getDate();for(var day=1;day<=total;day++){var cell=document.createElement("div");var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");cell.className="day"+(isBusy(ds)?" busy":"");cell.textContent=day;days.appendChild(cell)}el.appendChild(days);wrap.appendChild(el)}}
 async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
