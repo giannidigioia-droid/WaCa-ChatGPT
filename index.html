@@ -36,9 +36,7 @@ nav{position:fixed;z-index:50;top:0;left:0;right:0;padding:18px 28px;display:fle
 .quote{min-height:62vh;background:url("https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_1800/v1771578262/PatioSud_uxb3ey.jpg") center/cover fixed;position:relative;display:grid;place-items:center;text-align:center;color:#fff}.quote:before{content:"";position:absolute;inset:0;background:rgba(9,20,15,.55)}.quote-inner{position:relative;max-width:950px;padding:50px}.quote q{font:500 clamp(50px,6vw,90px)/.95 "Cormorant Garamond",serif}.quote small{display:block;margin-top:30px;letter-spacing:.16em}
 .location{display:grid;grid-template-columns:1fr 1fr;padding:8vw 6vw;gap:8vw}.location-list{margin-top:36px}.location-item{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:17px 0}.location-item:last-child{border-bottom:1px solid var(--line)}
 .reviews{padding:8vw 6vw;background:var(--white)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}.review{border:1px solid var(--line);padding:28px}.stars{letter-spacing:.08em}.review p{color:var(--muted);line-height:1.7}.review b{font-size:11px;letter-spacing:.12em}
-.booking{padding:8vw 6vw;background:#183126;color:white}.booking-wrap{max-width:1180px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw}.booking .section-title{color:white}.proof{font-size:13px;line-height:2;color:#d7e1db}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}.choice{border:1px solid rgba(255,255,255,.28);background:transparent;color:white;text-align:left;padding:17px;cursor:pointer}.choice.active{background:white;color:var(--ink)}.choice b{display:block;font-family:"Cormorant Garamond",serif;font-size:28px}.choice span{font-size:11px}
-.availability{background:rgba(255,255,255,.07);padding:18px;margin:15px 0;min-height:64px}.calendar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.month{background:#f7f3eb;color:var(--ink);padding:12px}.month h4{text-align:center;margin:0 0 9px;font-family:"Cormorant Garamond",serif;font-size:21px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:11px}.day{aspect-ratio:1;display:grid;place-items:center;border:0;background:transparent;color:inherit;font:inherit;padding:0}.day.selectable{cursor:pointer;border-radius:50%;transition:background .15s,color .15s,transform .15s}.day.selectable:hover{background:#dce5d8;transform:scale(1.06)}.day.busy{background:#b66b54;color:white;border-radius:50%;cursor:not-allowed}.day.past{opacity:.32;cursor:not-allowed}.day.selected{background:#183126;color:white;border-radius:50%;font-weight:700}.day.in-range{background:#dce5d8;border-radius:50%}.day.head{font-weight:600;aspect-ratio:auto;padding:3px 0}.day.empty{opacity:0}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;letter-spacing:.12em;text-transform:uppercase}.field input,.field select{width:100%;padding:13px;border:0;background:#f7f3eb;color:var(--ink);font:14px Inter,sans-serif}.submit{margin-top:12px;width:100%;padding:15px;border:0;background:white;color:var(--ink);cursor:pointer;text-transform:uppercase;letter-spacing:.1em}.form-status{font-size:13px;margin-top:12px}
+.booking{padding:8vw 6vw;background:#183126;color:white}.booking-wrap{max-width:1180px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw}.booking .section-title{color:white}.proof{font-size:13px;line-height:2;color:#d7e1db}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}.choice{position:relative;border:1px solid #cfd6cd;background:#fff;color:var(--ink);text-align:left;padding:0;cursor:pointer;border-radius:14px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s}.choice:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.12)}.choice.active{border-color:#8eaa57;box-shadow:0 0 0 2px rgba(142,170,87,.2)}.choice img{width:100%;height:112px;object-fit:cover;display:block}.choice-body{position:relative;padding:12px 15px 14px}.choice b{display:block;font-family:"Cormorant Garamond",serif;font-size:29px;line-height:1}.choice span{font-size:11px}.choice-kicker{display:block;font-size:9px!important;letter-spacing:.08em;margin-bottom:8px}.radio-dot{position:absolute;right:14px;bottom:20px;width:20px;height:20px;border:1px solid #87938c;border-radius:50%;background:white}.choice.active .radio-dot:after{content:"";position:absolute;inset:5px;border-radius:50%;background:#183126}.premium-badge{position:absolute;z-index:2;top:10px;left:10px;background:#4f7c3f;color:white;border-radius:20px;padding:6px 10px;font-size:9px;font-weight:700;letter-spacing:.05em}.minstay{background:#f4f0e8;color:#5b554e;border-left:3px solid #9cad69;padding:14px 16px;margin:15px 0 18px;font-size:12px}.minstay a{color:inherit}.calendar-panel{background:#fff;color:var(--ink);border:1px solid #d9ddd8;padding:18px 18px 14px}.calendar-status{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}.calendar-status b{display:block;font-size:14px}.calendar-status small{display:block;color:#7d877f;margin-top:2px;font-size:11px}.status-dot{width:10px;height:10px;border-radius:50%;background:#9db76b;margin-top:5px;box-shadow:0 0 0 4px rgba(157,183,107,.12)}.calendar-toolbar{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;gap:10px;margin:8px 0 12px}.calendar-toolbar strong{text-align:center;font-family:"Cormorant Garamond",serif;font-size:23px}.calendar-toolbar button{height:36px;background:#fff;border:1px solid #d9ddd8;cursor:pointer;font-size:20px}.calendar-wrap{display:block}.month{background:#fff;color:var(--ink);padding:0}.month h4{display:none}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:12px}.day{min-height:54px;display:grid;place-items:center;border:0;background:#e7ecde;color:inherit;font:inherit;padding:0}.day.selectable{cursor:pointer;transition:filter .15s,transform .15s}.day.selectable:hover{filter:brightness(.96);transform:translateY(-1px)}.day.busy{background:#df6b31;color:white;cursor:not-allowed}.day.past{opacity:.35;cursor:not-allowed}.day.selected{background:#183126;color:white;font-weight:700}.day.in-range{background:#c9d8b4}.day.head{font-weight:600;min-height:28px;background:transparent;color:#708078}.day.empty{opacity:0;pointer-events:none}.calendar-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:11px;color:#66736b}.calendar-legend span{display:flex;align-items:center;gap:6px}.calendar-legend i{width:12px;height:12px;display:inline-block}.legend-free{background:#e7ecde}.legend-busy{background:#df6b31}.legend-selected{background:#183126}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;letter-spacing:.12em;text-transform:uppercase}.field input,.field select{width:100%;padding:13px;border:0;background:#f7f3eb;color:var(--ink);font:14px Inter,sans-serif}.submit{margin-top:12px;width:100%;padding:15px;border:0;background:white;color:var(--ink);cursor:pointer;text-transform:uppercase;letter-spacing:.1em}.form-status{font-size:13px;margin-top:12px}
 footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:12px}.footer-links{display:flex;gap:20px}
 .lightbox{position:fixed;z-index:100;inset:0;background:rgba(6,11,8,.95);display:none;align-items:center;justify-content:center;padding:30px}.lightbox.open{display:flex}.lightbox img{max-width:92vw;max-height:86vh;object-fit:contain}.lb-close,.lb-prev,.lb-next{position:absolute;border:0;background:rgba(255,255,255,.9);width:45px;height:45px;border-radius:50%;font-size:24px;cursor:pointer}.lb-close{right:20px;top:20px}.lb-prev{left:20px;top:50%}.lb-next{right:20px;top:50%}
 .floating{position:fixed;z-index:45;right:20px;bottom:20px;background:#183126;color:white;text-decoration:none;padding:14px 17px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
@@ -121,17 +119,26 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <section class="reviews"><div class="eyebrow">PAROLE DEGLI OSPITI</div><h2 class="section-title">Chi arriva,<br>vuole tornare.</h2><div class="review-grid"><div class="review"><div class="stars">★★★★★</div><p>“Un posto bellissimo in un uliveto, lontano dalla folla. Il relax più autentico.”</p><b>PIOTR · AIRBNB</b></div><div class="review"><div class="stars">★★★★★</div><p>“The location is incredibly peaceful and quiet. Everything is beautifully maintained.”</p><b>MAJA · BOOKING</b></div><div class="review"><div class="stars">★★★★★</div><p>“Casa come nelle foto, posizione strategica e proprietari super accoglienti.”</p><b>PASQUALE · AIRBNB</b></div></div></section>
 
 <section id="booking" class="booking"><div class="booking-wrap">
-<div><div class="eyebrow">PRENOTAZIONE DIRETTA</div><h2 class="section-title">Verifica disponibilità.</h2><p>Scegli la soluzione che preferisci per vedere le date disponibili e inviare una richiesta senza impegno.</p><div class="proof">✓ Disponibilità da Google Calendar<br>✓ Nessun pagamento ora<br>✓ Risposta diretta dall’host</div></div>
+<div><div class="eyebrow">PRENOTAZIONE DIRETTA</div><h2 class="section-title">Verifica disponibilità.</h2><p>Scegli la soluzione che preferisci, poi seleziona direttamente check-in e check-out dal calendario.</p><div class="proof">✓ Disponibilità da Google Calendar<br>✓ Nessun pagamento ora<br>✓ Risposta diretta dall’host</div></div>
 <div>
-<div class="choices"><button class="choice" data-unit="oasis" onclick="selectUnit('oasis')"><span>SOLUZIONE PREFERITA</span><b>Oasis</b><span>fino a 4 ospiti</span></button><button class="choice" data-unit="heaven" onclick="selectUnit('heaven')"><b>Heaven</b><span>fino a 5 ospiti</span></button><button class="choice" data-unit="dream" onclick="selectUnit('dream')"><b>Dream</b><span>fino a 6 ospiti</span></button><button class="choice" data-unit="villa" onclick="selectUnit('villa')"><span>SOLUZIONE PREMIUM</span><b>Villa intera</b><span>fino a 15 ospiti</span></button></div>
-<div style="font-size:12px">Soggiorno minimo 5 notti. Eccezioni su richiesta via WhatsApp.</div>
-<div class="availability" id="availability">Seleziona una soluzione per vedere il calendario.</div>
+<div class="choices">
+<button class="choice" data-unit="oasis" onclick="selectUnit('oasis')"><img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_900/v1779974521/patio_oasis_hq.jpg" alt="Oasis"><div class="choice-body"><span class="choice-kicker">SOLUZIONE PREFERITA</span><b>Oasis</b><span>fino a 4 ospiti</span><i class="radio-dot"></i></div></button>
+<button class="choice" data-unit="heaven" onclick="selectUnit('heaven')"><img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_900/v1789651755/Patio_Heaven_ki0yrt.png" alt="Heaven"><div class="choice-body"><b>Heaven</b><span>fino a 5 ospiti</span><i class="radio-dot"></i></div></button>
+<button class="choice" data-unit="dream" onclick="selectUnit('dream')"><img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_900/v1771578266/PiscinaLuceceleste_uutpui.jpg" alt="Dream"><div class="choice-body"><b>Dream</b><span>fino a 6 ospiti</span><i class="radio-dot"></i></div></button>
+<button class="choice" data-unit="villa" onclick="selectUnit('villa')"><div class="premium-badge">SOLUZIONE PREMIUM</div><img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,w_900/v1771582021/VillaWaca_Owner_05_z50jcq.jpg" alt="Villa intera"><div class="choice-body"><b>Villa intera</b><span>fino a 15 ospiti</span><i class="radio-dot"></i></div></button>
+</div>
+<div class="minstay">Soggiorno minimo 5 notti. Eccezioni su richiesta via <a href="https://wa.me/393200921182" target="_blank" rel="noopener">WhatsApp</a>.</div>
+<div class="calendar-panel">
+<div class="calendar-status"><span class="status-dot"></span><div><b>Disponibilità WaCa Calendar</b><small id="availability">Seleziona una soluzione per vedere il calendario.</small></div></div>
+<div class="calendar-toolbar"><button type="button" onclick="changeMonth(-1)" aria-label="Mese precedente">‹</button><strong id="calendarTitle"></strong><button type="button" onclick="changeMonth(1)" aria-label="Mese successivo">›</button></div>
 <div class="calendar-wrap" id="calendarWrap"></div>
+<div class="calendar-legend"><span><i class="legend-free"></i>Disponibile</span><span><i class="legend-busy"></i>Non disponibile</span><span><i class="legend-selected"></i>Selezionato</span></div>
+</div>
 <form id="bookingForm" onsubmit="submitBooking(event)">
 <input type="hidden" id="unit" name="unit">
 <div class="form-grid">
-<div class="field"><label>Check-in</label><input id="checkin" type="date" required></div>
-<div class="field"><label>Check-out</label><input id="checkout" type="date" required></div>
+<div class="field"><label>Check-in</label><input id="checkin" type="date" required readonly></div>
+<div class="field"><label>Check-out</label><input id="checkout" type="date" required readonly></div>
 <div class="field"><label>Adulti</label><select id="adults"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
 <div class="field"><label>Ragazzi</label><select id="children"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
 <div class="field"><label>Nome completo</label><input id="name" required></div>
@@ -232,6 +239,7 @@ let busyPeriods=[];
 let selectedCheckin="";
 let selectedCheckout="";
 let calendarAvailable=false;
+let calendarMonthOffset=0;
 let calendarRequestController=null;
 let calendarRequestSeq=0;
 function selectUnit(unit){
@@ -239,9 +247,16 @@ function selectUnit(unit){
   document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});
   selectedCheckin="";
   selectedCheckout="";
+  calendarMonthOffset=0;
   document.getElementById("checkin").value="";
   document.getElementById("checkout").value="";
   loadAvailability(unit);
+}
+function changeMonth(delta){
+  calendarMonthOffset+=delta;
+  if(calendarMonthOffset<0)calendarMonthOffset=0;
+  if(calendarMonthOffset>12)calendarMonthOffset=12;
+  renderCalendars();
 }
 async function loadAvailability(unit){
   var box=document.getElementById("availability");
@@ -250,27 +265,28 @@ async function loadAvailability(unit){
   if(calendarRequestController)calendarRequestController.abort();
   calendarRequestController=new AbortController();
   busyPeriods=[];
+  calendarAvailable=false;
   wrap.innerHTML="";
-  box.textContent="Aggiornamento calendario in corso…";
+  box.textContent="Aggiornamento disponibilità in corso…";
   try{
     var r=await fetch("/api/calendar?unit="+encodeURIComponent(unit)+"&_="+Date.now(),{
       cache:"no-store",
       headers:{"Cache-Control":"no-cache, no-store, must-revalidate","Pragma":"no-cache"},
       signal:calendarRequestController.signal
     });
-    if(!r.ok)throw new Error("calendar");
+    if(!r.ok)throw new Error("calendar "+r.status);
     var data=await r.json();
     if(requestId!==calendarRequestSeq)return;
     busyPeriods=Array.isArray(data.periods)?data.periods:[];
     calendarAvailable=true;
-    box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · clicca una data di arrivo e una di partenza · aggiornato "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    box.textContent="Aggiornato automaticamente "+new Date().toLocaleDateString("it-IT")+" alle "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
     renderCalendars();
   }catch(err){
     if(err&&err.name==="AbortError")return;
     if(requestId!==calendarRequestSeq)return;
     busyPeriods=[];
     calendarAvailable=false;
-    box.textContent="Calendario temporaneamente non disponibile. La selezione date è disabilitata finché la disponibilità non viene aggiornata.";
+    box.textContent="Calendario temporaneamente non disponibile.";
     renderCalendars();
   }
 }
@@ -291,6 +307,9 @@ function rangeHasBusy(start,end){
   }
   return false;
 }
+function nightsBetween(start,end){
+  return Math.round((new Date(end+"T12:00:00")-new Date(start+"T12:00:00"))/86400000);
+}
 function chooseCalendarDate(ds){
   if(!calendarAvailable||isBusy(ds)||isPast(ds))return;
   if(!selectedCheckin||selectedCheckout||ds<=selectedCheckin){
@@ -300,8 +319,12 @@ function chooseCalendarDate(ds){
     if(rangeHasBusy(selectedCheckin,ds)){
       selectedCheckin=ds;
       selectedCheckout="";
+    }else if(nightsBetween(selectedCheckin,ds)<5){
+      document.getElementById("formStatus").textContent="Il soggiorno minimo è di 5 notti.";
+      return;
     }else{
       selectedCheckout=ds;
+      document.getElementById("formStatus").textContent="Date selezionate. Completa i dati e invia la richiesta.";
     }
   }
   document.getElementById("checkin").value=selectedCheckin;
@@ -310,49 +333,46 @@ function chooseCalendarDate(ds){
 }
 function renderCalendars(){
   var wrap=document.getElementById("calendarWrap");
+  var title=document.getElementById("calendarTitle");
   wrap.innerHTML="";
   var now=new Date();
-  for(var m=0;m<3;m++){
-    var d=new Date(now.getFullYear(),now.getMonth()+m,1);
-    var year=d.getFullYear(),month=d.getMonth();
-    var el=document.createElement("div");
-    el.className="month";
-    var title=document.createElement("h4");
-    title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});
-    el.appendChild(title);
-    var days=document.createElement("div");
-    days.className="days";
-    ["L","M","M","G","V","S","D"].forEach(function(x){
-      var h=document.createElement("div");
-      h.className="day head";
-      h.textContent=x;
-      days.appendChild(h);
-    });
-    var first=(new Date(year,month,1).getDay()+6)%7;
-    for(var e=0;e<first;e++){
-      var q=document.createElement("div");
-      q.className="day empty";
-      days.appendChild(q);
-    }
-    var total=new Date(year,month+1,0).getDate();
-    for(var day=1;day<=total;day++){
-      var cell=document.createElement("button");
-      cell.type="button";
-      var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");
-      var busy=isBusy(ds),past=isPast(ds);
-      var selected=ds===selectedCheckin||ds===selectedCheckout;
-      var inRange=selectedCheckin&&selectedCheckout&&ds>selectedCheckin&&ds<selectedCheckout;
-      cell.className="day"+(busy?" busy":"")+(past?" past":"")+(selected?" selected":"")+(inRange?" in-range":"")+(!busy&&!past&&calendarAvailable?" selectable":"");
-      cell.textContent=day;
-      cell.dataset.date=ds;
-      cell.disabled=busy||past||!calendarAvailable;
-      cell.setAttribute("aria-label",ds+(busy?" non disponibile":" disponibile"));
-      if(!cell.disabled)cell.addEventListener("click",function(){chooseCalendarDate(this.dataset.date)});
-      days.appendChild(cell);
-    }
-    el.appendChild(days);
-    wrap.appendChild(el);
+  var d=new Date(now.getFullYear(),now.getMonth()+calendarMonthOffset,1);
+  var year=d.getFullYear(),month=d.getMonth();
+  title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});
+  var el=document.createElement("div");
+  el.className="month";
+  var days=document.createElement("div");
+  days.className="days";
+  ["L","M","M","G","V","S","D"].forEach(function(x){
+    var h=document.createElement("div");
+    h.className="day head";
+    h.textContent=x;
+    days.appendChild(h);
+  });
+  var first=(new Date(year,month,1).getDay()+6)%7;
+  for(var e=0;e<first;e++){
+    var q=document.createElement("div");
+    q.className="day empty";
+    days.appendChild(q);
   }
+  var total=new Date(year,month+1,0).getDate();
+  for(var day=1;day<=total;day++){
+    var cell=document.createElement("button");
+    cell.type="button";
+    var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+    var busy=isBusy(ds),past=isPast(ds);
+    var selected=ds===selectedCheckin||ds===selectedCheckout;
+    var inRange=selectedCheckin&&selectedCheckout&&ds>selectedCheckin&&ds<selectedCheckout;
+    cell.className="day"+(busy?" busy":"")+(past?" past":"")+(selected?" selected":"")+(inRange?" in-range":"")+(!busy&&!past&&calendarAvailable?" selectable":"");
+    cell.textContent=day;
+    cell.dataset.date=ds;
+    cell.disabled=busy||past||!calendarAvailable;
+    cell.setAttribute("aria-label",ds+(busy?" non disponibile":" disponibile"));
+    if(!cell.disabled)cell.addEventListener("click",function(){chooseCalendarDate(this.dataset.date)});
+    days.appendChild(cell);
+  }
+  el.appendChild(days);
+  wrap.appendChild(el);
 }
 async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowRight")lbMove(1);if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowLeft")lbMove(-1)});
