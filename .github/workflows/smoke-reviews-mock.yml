@@ -1,0 +1,23 @@
+name: Smoke reviews mock
+
+on:
+  push:
+    branches: [reviews-mock-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify mock
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/reviews-mock.html
+          grep -q 'Tutte · 19' dist/reviews-mock.html
+          grep -q 'Eccezionale su Booking' dist/reviews-mock.html
+          test "$(grep -o 'class="review-card"' dist/reviews-mock.html | wc -l)" -eq 19
