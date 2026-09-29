@@ -37,7 +37,7 @@ nav{position:fixed;z-index:50;top:0;left:0;right:0;padding:18px 28px;display:fle
 .location{display:grid;grid-template-columns:1fr 1fr;padding:8vw 6vw;gap:8vw}.location-list{margin-top:36px}.location-item{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:17px 0}.location-item:last-child{border-bottom:1px solid var(--line)}
 .reviews{padding:8vw 6vw;background:var(--white)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}.review{border:1px solid var(--line);padding:28px}.stars{letter-spacing:.08em}.review p{color:var(--muted);line-height:1.7}.review b{font-size:11px;letter-spacing:.12em}
 .booking{padding:8vw 6vw;background:#183126;color:white}.booking-wrap{max-width:1180px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw}.booking .section-title{color:white}.proof{font-size:13px;line-height:2;color:#d7e1db}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}.choice{border:1px solid rgba(255,255,255,.28);background:transparent;color:white;text-align:left;padding:17px;cursor:pointer}.choice.active{background:white;color:var(--ink)}.choice b{display:block;font-family:"Cormorant Garamond",serif;font-size:28px}.choice span{font-size:11px}
-.availability{background:rgba(255,255,255,.07);padding:18px;margin:15px 0;min-height:64px}.calendar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.month{background:#f7f3eb;color:var(--ink);padding:12px}.month h4{text-align:center;margin:0 0 9px;font-family:"Cormorant Garamond",serif;font-size:21px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:11px}.day{aspect-ratio:1;display:grid;place-items:center}.day.busy{background:#b66b54;color:white}.day.head{font-weight:600;aspect-ratio:auto;padding:3px 0}.day.empty{opacity:0}
+.availability{background:rgba(255,255,255,.07);padding:18px;margin:15px 0;min-height:64px}.calendar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.month{background:#f7f3eb;color:var(--ink);padding:12px}.month h4{text-align:center;margin:0 0 9px;font-family:"Cormorant Garamond",serif;font-size:21px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:11px}.day{aspect-ratio:1;display:grid;place-items:center;border:0;background:transparent;color:inherit;font:inherit;padding:0}.day.selectable{cursor:pointer;border-radius:50%;transition:background .15s,color .15s,transform .15s}.day.selectable:hover{background:#dce5d8;transform:scale(1.06)}.day.busy{background:#b66b54;color:white;border-radius:50%;cursor:not-allowed}.day.past{opacity:.32;cursor:not-allowed}.day.selected{background:#183126;color:white;border-radius:50%;font-weight:700}.day.in-range{background:#dce5d8;border-radius:50%}.day.head{font-weight:600;aspect-ratio:auto;padding:3px 0}.day.empty{opacity:0}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;letter-spacing:.12em;text-transform:uppercase}.field input,.field select{width:100%;padding:13px;border:0;background:#f7f3eb;color:var(--ink);font:14px Inter,sans-serif}.submit{margin-top:12px;width:100%;padding:15px;border:0;background:white;color:var(--ink);cursor:pointer;text-transform:uppercase;letter-spacing:.1em}.form-status{font-size:13px;margin-top:12px}
 footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:12px}.footer-links{display:flex;gap:20px}
 .lightbox{position:fixed;z-index:100;inset:0;background:rgba(6,11,8,.95);display:none;align-items:center;justify-content:center;padding:30px}.lightbox.open{display:flex}.lightbox img{max-width:92vw;max-height:86vh;object-fit:contain}.lb-close,.lb-prev,.lb-next{position:absolute;border:0;background:rgba(255,255,255,.9);width:45px;height:45px;border-radius:50%;font-size:24px;cursor:pointer}.lb-close{right:20px;top:20px}.lb-prev{left:20px;top:50%}.lb-next{right:20px;top:50%}
@@ -229,11 +229,18 @@ function lbMove(dir,e){if(e)e.stopPropagation();lbIndex=(lbIndex+dir+lbItems.len
 function renderGallery(cat){document.querySelectorAll(".gallery-tabs button").forEach(function(b){b.classList.toggle("active",b.dataset.cat===cat)});var arr=galleryData[cat],grid=document.getElementById("galleryGrid");document.getElementById("galleryCount").textContent=arr.length+" foto";grid.innerHTML="";arr.forEach(function(src,i){var b=document.createElement("button");b.innerHTML='<img src="'+src+'" loading="lazy" alt="WaCa '+cat+'">';b.onclick=function(){openLightboxFrom(arr,i)};grid.appendChild(b)})}
 function initGallery(){var tabs=document.getElementById("galleryTabs");Object.keys(galleryData).forEach(function(cat){var b=document.createElement("button");b.textContent=cat;b.dataset.cat=cat;b.onclick=function(){renderGallery(cat)};tabs.appendChild(b)});renderGallery("Piscina")}
 let busyPeriods=[];
+let selectedCheckin="";
+let selectedCheckout="";
+let calendarAvailable=false;
 let calendarRequestController=null;
 let calendarRequestSeq=0;
 function selectUnit(unit){
   document.getElementById("unit").value=unit;
   document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});
+  selectedCheckin="";
+  selectedCheckout="";
+  document.getElementById("checkin").value="";
+  document.getElementById("checkout").value="";
   loadAvailability(unit);
 }
 async function loadAvailability(unit){
@@ -255,18 +262,98 @@ async function loadAvailability(unit){
     var data=await r.json();
     if(requestId!==calendarRequestSeq)return;
     busyPeriods=Array.isArray(data.periods)?data.periods:[];
-    box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · aggiornato "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    calendarAvailable=true;
+    box.textContent=(data.label||unit)+" · "+busyPeriods.length+" periodi occupati · clicca una data di arrivo e una di partenza · aggiornato "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
     renderCalendars();
   }catch(err){
     if(err&&err.name==="AbortError")return;
     if(requestId!==calendarRequestSeq)return;
     busyPeriods=[];
-    box.textContent="Calendario temporaneamente non disponibile. Puoi comunque inviare la richiesta.";
+    calendarAvailable=false;
+    box.textContent="Calendario temporaneamente non disponibile. La selezione date è disabilitata finché la disponibilità non viene aggiornata.";
     renderCalendars();
   }
 }
 function isBusy(dateStr){return busyPeriods.some(function(p){return dateStr>=p.start&&dateStr<p.end})}
-function renderCalendars(){var wrap=document.getElementById("calendarWrap");wrap.innerHTML="";var now=new Date();for(var m=0;m<3;m++){var d=new Date(now.getFullYear(),now.getMonth()+m,1);var year=d.getFullYear(),month=d.getMonth();var el=document.createElement("div");el.className="month";var title=document.createElement("h4");title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});el.appendChild(title);var days=document.createElement("div");days.className="days";["L","M","M","G","V","S","D"].forEach(function(x){var h=document.createElement("div");h.className="day head";h.textContent=x;days.appendChild(h)});var first=(new Date(year,month,1).getDay()+6)%7;for(var e=0;e<first;e++){var q=document.createElement("div");q.className="day empty";days.appendChild(q)}var total=new Date(year,month+1,0).getDate();for(var day=1;day<=total;day++){var cell=document.createElement("div");var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");cell.className="day"+(isBusy(ds)?" busy":"");cell.textContent=day;days.appendChild(cell)}el.appendChild(days);wrap.appendChild(el)}}
+function isPast(dateStr){
+  var today=new Date();
+  var localToday=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+  return dateStr<localToday;
+}
+function rangeHasBusy(start,end){
+  if(!start||!end||end<=start)return false;
+  var d=new Date(start+"T12:00:00");
+  var stop=new Date(end+"T12:00:00");
+  while(d<stop){
+    var ds=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    if(isBusy(ds))return true;
+    d.setDate(d.getDate()+1);
+  }
+  return false;
+}
+function chooseCalendarDate(ds){
+  if(!calendarAvailable||isBusy(ds)||isPast(ds))return;
+  if(!selectedCheckin||selectedCheckout||ds<=selectedCheckin){
+    selectedCheckin=ds;
+    selectedCheckout="";
+  }else{
+    if(rangeHasBusy(selectedCheckin,ds)){
+      selectedCheckin=ds;
+      selectedCheckout="";
+    }else{
+      selectedCheckout=ds;
+    }
+  }
+  document.getElementById("checkin").value=selectedCheckin;
+  document.getElementById("checkout").value=selectedCheckout;
+  renderCalendars();
+}
+function renderCalendars(){
+  var wrap=document.getElementById("calendarWrap");
+  wrap.innerHTML="";
+  var now=new Date();
+  for(var m=0;m<3;m++){
+    var d=new Date(now.getFullYear(),now.getMonth()+m,1);
+    var year=d.getFullYear(),month=d.getMonth();
+    var el=document.createElement("div");
+    el.className="month";
+    var title=document.createElement("h4");
+    title.textContent=d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});
+    el.appendChild(title);
+    var days=document.createElement("div");
+    days.className="days";
+    ["L","M","M","G","V","S","D"].forEach(function(x){
+      var h=document.createElement("div");
+      h.className="day head";
+      h.textContent=x;
+      days.appendChild(h);
+    });
+    var first=(new Date(year,month,1).getDay()+6)%7;
+    for(var e=0;e<first;e++){
+      var q=document.createElement("div");
+      q.className="day empty";
+      days.appendChild(q);
+    }
+    var total=new Date(year,month+1,0).getDate();
+    for(var day=1;day<=total;day++){
+      var cell=document.createElement("button");
+      cell.type="button";
+      var ds=year+"-"+String(month+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+      var busy=isBusy(ds),past=isPast(ds);
+      var selected=ds===selectedCheckin||ds===selectedCheckout;
+      var inRange=selectedCheckin&&selectedCheckout&&ds>selectedCheckin&&ds<selectedCheckout;
+      cell.className="day"+(busy?" busy":"")+(past?" past":"")+(selected?" selected":"")+(inRange?" in-range":"")+(!busy&&!past&&calendarAvailable?" selectable":"");
+      cell.textContent=day;
+      cell.dataset.date=ds;
+      cell.disabled=busy||past||!calendarAvailable;
+      cell.setAttribute("aria-label",ds+(busy?" non disponibile":" disponibile"));
+      if(!cell.disabled)cell.addEventListener("click",function(){chooseCalendarDate(this.dataset.date)});
+      days.appendChild(cell);
+    }
+    el.appendChild(days);
+    wrap.appendChild(el);
+  }
+}
 async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowRight")lbMove(1);if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowLeft")lbMove(-1)});
 mountApartmentSliders();initGallery();
