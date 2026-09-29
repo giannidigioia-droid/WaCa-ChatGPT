@@ -1,0 +1,23 @@
+name: Smoke Heaven card crop
+
+on:
+  push:
+    branches: [heaven-card-crop-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify Heaven crop
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'e_trim:10/f_auto,q_auto,c_fill,g_center,w_900,h_360/v1789651755/Patio_Heaven_ki0yrt.png' dist/index.html
+          grep -q 'data-unit="heaven"' dist/index.html
+          grep -q 'data-unit="oasis"' dist/index.html
