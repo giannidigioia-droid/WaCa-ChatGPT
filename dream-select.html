@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Selezione foto Dream · WaCa</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f3efe7;color:#183126}
+header{padding:28px 5vw;position:sticky;top:0;z-index:10;background:rgba(243,239,231,.96);border-bottom:1px solid #d8d2c8}
+h1{margin:0 0 8px;font-size:34px}p{margin:0;color:#66736b}
+.grid{padding:24px 5vw 100px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{position:relative;background:white;border:2px solid transparent;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+.card:has(input:checked){border-color:#183126;box-shadow:0 0 0 3px rgba(24,49,38,.12)}
+.card input{position:absolute;right:14px;top:14px;width:24px;height:24px;z-index:3}
+.num{position:absolute;left:12px;top:12px;background:#183126;color:white;border-radius:999px;width:38px;height:38px;display:grid;place-items:center;font-weight:700;z-index:2}
+.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#ddd}
+.meta{padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:center}.meta span{font-size:12px;color:#78827c}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#183126;color:white;padding:14px 5vw;display:flex;justify-content:space-between;align-items:center;gap:16px}
+button{background:white;color:#183126;border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
+#sel{font-weight:700}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head><body>
+<header><h1>Scegli le foto Dream</h1><p>Seleziona le immagini da usare nello slider Dream. Poi premi “Copia selezione” e incollami i numeri.</p></header>
+<main class="grid">
+<label class="card">
+  <input type="checkbox" value="1">
+  <div class="num">1</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png" alt="Patio Dream Golden Hour" loading="lazy">
+  <div class="meta"><b>Patio Dream Golden Hour</b><span>1448×1086</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="2">
+  <div class="num">2</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1789631856/patio-dream-cena.png" alt="Patio Dream cena" loading="lazy">
+  <div class="meta"><b>Patio Dream cena</b><span>1448×1086</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="3">
+  <div class="num">3</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779981721/divano_patio_hq.jpg" alt="Divano patio Dream HQ" loading="lazy">
+  <div class="meta"><b>Divano patio Dream HQ</b><span>1280×900</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="4">
+  <div class="num">4</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779981366/stanzetta_1_posto_dream_hq_2.jpg" alt="Camera singola verticale HQ" loading="lazy">
+  <div class="meta"><b>Camera singola verticale HQ</b><span>1280×1800</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="5">
+  <div class="num">5</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779981298/stanzetta_1_posto_dream_hq.jpg" alt="Camera singola HQ" loading="lazy">
+  <div class="meta"><b>Camera singola HQ</b><span>1280×900</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="6">
+  <div class="num">6</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779981178/stanzetta_dream_hq.jpg" alt="Seconda camera Dream HQ" loading="lazy">
+  <div class="meta"><b>Seconda camera Dream HQ</b><span>1280×900</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="7">
+  <div class="num">7</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779974211/dream_stanzamatrimoniale_hq.jpg" alt="Camera matrimoniale Dream HQ" loading="lazy">
+  <div class="meta"><b>Camera matrimoniale Dream HQ</b><span>1280×900</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="8">
+  <div class="num">8</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1779983310/copy_of_bagno_dream_hq2.jpg" alt="Bagno Dream HQ" loading="lazy">
+  <div class="meta"><b>Bagno Dream HQ</b><span>1280×900</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="9">
+  <div class="num">9</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578269/soggiornocondivanola_centro_axve9w.jpg" alt="Soggiorno con divano" loading="lazy">
+  <div class="meta"><b>Soggiorno con divano</b><span>800×533</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="10">
+  <div class="num">10</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578268/soggiorno_hcs2mv.jpg" alt="Soggiorno" loading="lazy">
+  <div class="meta"><b>Soggiorno</b><span>800×533</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="11">
+  <div class="num">11</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578261/Cucinafinestraaperta_neez2f.jpg" alt="Cucina" loading="lazy">
+  <div class="meta"><b>Cucina</b><span>800×533</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="12">
+  <div class="num">12</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578260/bagno2_ja1e8i.jpg" alt="Bagno 2" loading="lazy">
+  <div class="meta"><b>Bagno 2</b><span>800×533</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="13">
+  <div class="num">13</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578259/bagno1_ohvww1.jpg" alt="Bagno 1" loading="lazy">
+  <div class="meta"><b>Bagno 1</b><span>800×533</span></div>
+</label>
+<label class="card">
+  <input type="checkbox" value="14">
+  <div class="num">14</div>
+  <img src="https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1771578266/PiscinaLuceceleste_uutpui.jpg" alt="Piscina vista Dream" loading="lazy">
+  <div class="meta"><b>Piscina vista Dream</b><span>1024×683</span></div>
+</label></main>
+<div class="bar"><div>Selezionate: <span id="sel">nessuna</span></div><button onclick="copySel()">Copia selezione</button></div>
+<script>
+const boxes=[...document.querySelectorAll('input[type=checkbox]')];
+function values(){return boxes.filter(x=>x.checked).map(x=>x.value)}
+function render(){document.getElementById('sel').textContent=values().join(', ')||'nessuna'}
+boxes.forEach(x=>x.addEventListener('change',render));
+async function copySel(){const v=values().join(', ');if(!v)return;await navigator.clipboard.writeText(v);document.querySelector('button').textContent='Copiato ✓';setTimeout(()=>document.querySelector('button').textContent='Copia selezione',1200)}
+</script></body></html>
