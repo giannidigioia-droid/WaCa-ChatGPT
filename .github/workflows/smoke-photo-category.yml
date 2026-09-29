@@ -1,0 +1,86 @@
+name: Smoke photo category fix
+
+on:
+  push:
+    branches: [photo-category-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: npm run build
+
+      - name: JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, pathlib
+          html=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",html)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify categories and Dream sharpness policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+
+          def block(name):
+              m=re.search(rf' {name}:\[(.*?)\n \]', h, re.S)
+              assert m, f"{name} missing"
+              return m.group(1).lower()
+
+          est=block("Esterni")
+          assert not any(x in est for x in ["cucina","bagno","camera","stanza","letto","patio"]), est
+
+          inter=block("Interni")
+          assert not any(x in inter for x in ["patio","piscina","esterno","drone"]), inter
+
+          pat=block("Patii")
+          assert all(("patio" in u.lower()) for u in re.findall(r'https://[^"]+',pat)), pat
+
+          pool=block("Piscina")
+          assert all(("piscina" in u.lower()) for u in re.findall(r'https://[^"]+',pool)), pool
+
+          cam=block("Camere")
+          assert all(any(k in u.lower() for k in ["camera","stanza","letto"]) for u in re.findall(r'https://[^"]+',cam)), cam
+
+          dream=re.search(r'dream:\[(.*?)\n \],\n heaven:',h,re.S).group(1)
+          banned=[
+            "divano_patio_hq",
+            "copy_of_patiosudtavolo_sbht2t",
+            "copy_of_patiosudtavolopiscina_cendix",
+            "dream_stanzamatrimoniale_hq",
+            "stanzetta_dream_hq",
+            "copy_of_bagno_dream_hq2"
+          ]
+          for b in banned:
+              assert b not in dream, f"soft Dream asset still present: {b}"
+          assert len(re.findall(r'https://res\.cloudinary\.com',dream))==5
+          print("Category checks passed")
+          PY
+
+      - name: Verify all Cloudinary image URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/urls.txt
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          for u in sorted(set(re.findall(r'https://res\.cloudinary\.com/dfu9nzn8r/image/upload/[^"\' )]+',h))):
+              print(u)
+          PY
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            test "$code" = "200" || { echo "Image failed ($code): $url"; exit 1; }
+          done < /tmp/urls.txt
