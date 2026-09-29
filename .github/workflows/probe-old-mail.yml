@@ -1,0 +1,22 @@
+name: Probe old mail backend
+
+on:
+  push:
+    branches: [probe-old-mail-backend]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test old WaCa mail endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"apartment":"Dream - OLD BACKEND PROBE","name":"WaCa SMOKE TEST","contact":"smoke-test@villawaca.it","checkin":"2026-12-01","checkout":"2026-12-06","adults":"2","children":"0"}'
+          code="$(curl --silent --show-error --max-time 30             -o /tmp/response.json             -w '%{http_code}'             -X POST 'https://wac-chatgpt.vercel.app/api/contact'             -H 'Content-Type: application/json'             --data "$payload")"
+          echo "HTTP $code"
+          cat /tmp/response.json
+          echo
