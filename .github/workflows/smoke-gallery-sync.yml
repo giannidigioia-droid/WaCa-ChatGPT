@@ -1,0 +1,59 @@
+name: Smoke gallery sync
+
+on:
+  push:
+    branches: [gallery-sync-all-apartment-photos-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and JS syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",h)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify category counts and no duplicates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          expected={"Piscina":6,"Patii":10,"Esterni":14,"Camere":8,"Interni":12}
+          for name,count in expected.items():
+              m=re.search(rf' {name}:\[(.*?)\n \]',h,re.S)
+              assert m, name
+              urls=re.findall(r'https://res\.cloudinary\.com[^"]+',m.group(1))
+              assert len(urls)==count,(name,len(urls),count)
+              assert len(urls)==len(set(urls)),f"duplicates in {name}"
+          print("Category counts OK")
+          PY
+
+      - name: Verify Cloudinary URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/urls.txt
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          for u in sorted(set(re.findall(r'https://res\.cloudinary\.com/dfu9nzn8r/image/upload/[^"\' )]+',h))):
+              print(u)
+          PY
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            test "$code" = "200" || { echo "Image failed ($code): $url"; exit 1; }
+          done < /tmp/urls.txt
