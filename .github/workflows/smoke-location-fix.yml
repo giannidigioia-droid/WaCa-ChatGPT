@@ -1,0 +1,22 @@
+name: Smoke location fix
+
+on:
+  push:
+    branches: [location-fix-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify exact location
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q '40.8682429, 17.3241775' dist/index.html
+          grep -q 'WaCa+-+Apulian+Villa/@40.8682429,17.3241775,17z' dist/index.html
+          ! grep -q 'Contrada+Vagone+329' dist/index.html
