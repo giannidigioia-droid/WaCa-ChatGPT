@@ -1,0 +1,25 @@
+name: Verify production calendar env
+
+on:
+  push:
+    branches: [calendar-env-verify]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Dream Heaven Oasis
+        shell: bash
+        run: |
+          set -euo pipefail
+          for unit in dream heaven oasis; do
+            echo "Testing $unit"
+            body="$(curl --fail --silent --show-error --max-time 20 "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=$unit&_=$(date +%s)")"
+            echo "$body" | jq -e --arg unit "$unit" '.unit == $unit and (.periods | type == "array")' >/dev/null
+            count="$(echo "$body" | jq '.periods | length')"
+            echo "$unit periods: $count"
+            test "$count" -gt 0
+          done
