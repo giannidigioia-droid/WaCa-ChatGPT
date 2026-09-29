@@ -1,0 +1,30 @@
+name: Smoke WaCa logo
+
+on:
+  push:
+    branches: [waca-logo-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify logo
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'A50CFB91-52F7-4AAB-A403-9EDC0BEA34A8_p3wrep.png' dist/index.html
+          grep -q 'rel="icon"' dist/index.html
+          grep -q 'class="brand-logo"' dist/index.html
+          if grep -q '<span class="brand-mark">W</span>' dist/index.html; then
+            echo "Old W mark still present"
+            exit 1
+          fi
+          logo="https://res.cloudinary.com/dfu9nzn8r/image/upload/v1771672878/A50CFB91-52F7-4AAB-A403-9EDC0BEA34A8_p3wrep.png"
+          code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$logo")"
+          test "$code" = "200"
