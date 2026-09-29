@@ -1,0 +1,23 @@
+name: Old backend real mail smoke
+
+on:
+  push:
+    branches: [old-mail-real-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send real smoke email via old backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"stay":"Dream","checkin":"2026-12-01","checkout":"2026-12-06","nights":5,"adults":2,"children":0,"name":"WaCa SMOKE TEST","contactInfo":"smoke-test@villawaca.it","website":""}'
+          code="$(curl --silent --show-error --max-time 30             -o /tmp/response.json             -w '%{http_code}'             -X POST 'https://wac-chatgpt.vercel.app/api/contact'             -H 'Content-Type: application/json'             --data "$payload")"
+          echo "HTTP $code"
+          cat /tmp/response.json
+          echo
+          test "$code" = "200"
