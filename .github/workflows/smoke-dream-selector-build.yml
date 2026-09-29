@@ -1,0 +1,23 @@
+name: Smoke Dream selector build
+
+on:
+  push:
+    branches: [dream-selector-build-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify selector output
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          test -f dist/dream-select.html
+          grep -q 'Scegli le foto Dream' dist/dream-select.html
+          test "$(grep -o 'type="checkbox"' dist/dream-select.html | wc -l)" -eq 14
