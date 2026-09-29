@@ -79,7 +79,7 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('dream',-1)">‹</button>
 <button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('dream',1)">›</button>
 <button class="open-gallery" onclick="openApartmentGallery('dream')">Vedi tutte le foto</button>
-<div class="counter" id="counter-dream">1 / 5</div>
+<div class="counter" id="counter-dream">1 / 14</div>
 </div>
 <div class="apt-copy"><span class="apt-tag">4+2 OSPITI</span><span class="apt-no">01</span><h3>Dream</h3><p>Tre camere, cucina completa e due patii privati, uno affacciato sulla piscina.</p><a class="apt-link" href="#booking" onclick="selectUnit('dream')">Richiedi Dream ↗</a></div>
 </article>
@@ -89,7 +89,7 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('heaven',-1)">‹</button>
 <button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('heaven',1)">›</button>
 <button class="open-gallery" onclick="openApartmentGallery('heaven')">Vedi tutte le foto</button>
-<div class="counter" id="counter-heaven">1 / 8</div>
+<div class="counter" id="counter-heaven">1 / 10</div>
 </div>
 <div class="apt-copy"><span class="apt-tag">4+1 OSPITI</span><span class="apt-no">02</span><h3>Heaven</h3><p>Luminoso e spazioso, con accesso diretto al patio, alla piscina e al giardino.</p><a class="apt-link" href="#booking" onclick="selectUnit('heaven')">Richiedi Heaven ↗</a></div>
 </article>
@@ -158,19 +158,30 @@ const apartments={
  dream:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789631856/patio-dream-cena.png",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974345/piscinaluceceleste_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981721/divano_patio_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981366/stanzetta_1_posto_dream_hq_2.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981298/stanzetta_1_posto_dream_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779972104/copy_of_b9dd12b5-38cb-4e6c-845d-194d27f96e13png_2023-09-08_08_42_18_myofms.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981178/stanzetta_dream_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974211/dream_stanzamatrimoniale_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779983310/copy_of_bagno_dream_hq2.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578269/soggiornocondivanola_centro_axve9w.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578268/soggiorno_hcs2mv.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578261/Cucinafinestraaperta_neez2f.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578260/bagno2_ja1e8i.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_800/v1771578259/bagno1_ohvww1.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1000/v1771578266/PiscinaLuceceleste_uutpui.jpg"
  ],
  heaven:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789651755/Patio_Heaven_ki0yrt.png",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974085/patio_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779982794/heaven_tavolo_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779977040/camera_da_letto_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981556/camera_heaven_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980919/stanzetta_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981046/cucina_heaven_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980565/bagno_heaven_hq.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980919/stanzetta_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980565/bagno_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980287/patio_heaven_hq_2.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779977040/camera_da_letto_heaven_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779975070/heaven_cucina_hq.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974085/patio_heaven_hq.jpg"
  ],
  oasis:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1789651756/Patio_Oasis_HD_gokk7g.png",
