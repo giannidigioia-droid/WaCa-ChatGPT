@@ -1,0 +1,29 @@
+name: Inspect old contact schema
+
+on:
+  push:
+    branches: [inspect-old-contact-schema]
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch old site
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 30 'https://wac-chatgpt.vercel.app/' -o /tmp/old.html
+          python - <<'PY'
+          from pathlib import Path
+          h=Path('/tmp/old.html').read_text(errors='ignore')
+          for needle in ['/api/contact','submitBooking','fetch(']:
+              i=h.find(needle)
+              print('\n===',needle,'===\n')
+              if i>=0:
+                  print(h[max(0,i-2500):i+5000])
+              else:
+                  print('NOT FOUND')
+          PY
