@@ -1,0 +1,25 @@
+name: Live smoke Dream selector
+
+on:
+  push:
+    branches: [dream-selector-live-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public selector
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://wa-ca-chat-gpt.vercel.app/dream-select.html?_=$(date +%s)"
+          code="$(curl -L --silent --show-error --max-time 20 -o /tmp/page.html -w '%{http_code}' "$url")"
+          echo "HTTP $code"
+          test "$code" = "200"
+          grep -q 'Scegli le foto Dream' /tmp/page.html
+          test "$(grep -o 'type="checkbox"' /tmp/page.html | wc -l)" -eq 14
+          grep -q 'Patio_Dream_Golden_Hour_qgj1e6' /tmp/page.html
+          echo "Selector page is live"
