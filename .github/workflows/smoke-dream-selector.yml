@@ -1,0 +1,32 @@
+name: Smoke Dream selector
+
+on:
+  push:
+    branches: [dream-photo-selector-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify selector
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dream-select.html
+          grep -q 'Scegli le foto Dream' dream-select.html
+          test "$(grep -o 'type="checkbox"' dream-select.html | wc -l)" -eq 14
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("dream-select.html").read_text()
+          urls=sorted(set(re.findall(r'https://res\.cloudinary\.com/[^"]+',h)))
+          assert len(urls)==14, len(urls)
+          pathlib.Path("/tmp/urls.txt").write_text("\n".join(urls))
+          PY
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            test "$code" = "200" || { echo "Image failed ($code): $url"; exit 1; }
+          done < /tmp/urls.txt
