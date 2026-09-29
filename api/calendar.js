@@ -9,7 +9,7 @@ function dateOnly(v){if(!v)return null;const m=v.match(/(\d{4})(\d{2})(\d{2})/);
 function parseIcs(text){
   text=unfold(text);const periods=[];const re=/BEGIN:VEVENT([\s\S]*?)END:VEVENT/g;let m;
   while((m=re.exec(text))){
-    const b=m[1];if(/STATUS:CANCELLED/i.test(b)||/TRANSP:TRANSPARENT/i.test(b))continue;
+    const b=m[1];if(/STATUS:CANCELLED/i.test(b))continue;
     const s=(b.match(/DTSTART(?:;[^:]*)?:(.+)/i)||[])[1];
     const e=(b.match(/DTEND(?:;[^:]*)?:(.+)/i)||[])[1];
     const start=dateOnly(s),end=dateOnly(e)||start;
