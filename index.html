@@ -79,7 +79,7 @@ footer{padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;alig
 <button class="slider-btn slider-prev" aria-label="Foto precedente" onclick="slideApt('dream',-1)">‹</button>
 <button class="slider-btn slider-next" aria-label="Foto successiva" onclick="slideApt('dream',1)">›</button>
 <button class="open-gallery" onclick="openApartmentGallery('dream')">Vedi tutte le foto</button>
-<div class="counter" id="counter-dream">1 / 11</div>
+<div class="counter" id="counter-dream">1 / 5</div>
 </div>
 <div class="apt-copy"><span class="apt-tag">4+2 OSPITI</span><span class="apt-no">01</span><h3>Dream</h3><p>Tre camere, cucina completa e due patii privati, uno affacciato sulla piscina.</p><a class="apt-link" href="#booking" onclick="selectUnit('dream')">Richiedi Dream ↗</a></div>
 </article>
@@ -158,14 +158,8 @@ const apartments={
  dream:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789631856/patio-dream-cena.png",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981721/divano_patio_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779972041/copy_of_patiosudtavolo_sbht2t.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779971952/copy_of_patiosudtavolopiscina_cendix.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974345/piscinaluceceleste_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974211/dream_stanzamatrimoniale_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981298/stanzetta_1_posto_dream_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981178/stanzetta_dream_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779983310/copy_of_bagno_dream_hq2.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779972104/copy_of_b9dd12b5-38cb-4e6c-845d-194d27f96e13png_2023-09-08_08_42_18_myofms.jpg"
  ],
  heaven:[
@@ -196,56 +190,35 @@ const galleryData={
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779976532/piscina_aereo_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974746/piscina_ovest_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974345/piscinaluceceleste_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582021/VillaWaca_Owner_05_z50jcq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582024/VillaWaca_Owner_022_z0adj1.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582017/VillaWaca_Owner_021_tapbd2.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779973260/hq_dronenotturno_xp9zht.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974321/copy_of_piscinaluceceleste_dtz2yq.jpg"
  ],
  Patii:[
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789651754/Patio_Dream_Golden_Hour_qgj1e6.png",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789631856/patio-dream-cena.png",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981721/divano_patio_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779972041/copy_of_patiosudtavolo_sbht2t.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779971952/copy_of_patiosudtavolopiscina_cendix.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1600/v1789651755/Patio_Heaven_ki0yrt.png",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980287/patio_heaven_hq_2.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974085/patio_heaven_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779982794/heaven_tavolo_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1789651756/Patio_Oasis_HD_gokk7g.png",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974521/patio_oasis_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981929/oasis_tavolo_hq.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974521/patio_oasis_hq.jpg"
  ],
  Esterni:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582028/VillaWaca_Owner_03_ibopcy.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582027/VillaWaca_Owner_029_fyb9fu.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582026/VillaWaca_Owner_07_sicv39.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582025/VillaWaca_Owner_020_zxflc4.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779982064/esterno_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779897297/esterno_di_sera.jpg"
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779897297/esterno_di_sera.jpg",
+ "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779973260/hq_dronenotturno_xp9zht.jpg"
  ],
  Camere:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779974211/dream_stanzamatrimoniale_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981298/stanzetta_1_posto_dream_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981178/stanzetta_dream_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779977040/camera_da_letto_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981556/camera_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980919/stanzetta_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779982474/oasis_letto_hq.jpg"
  ],
  Interni:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779983310/copy_of_bagno_dream_hq2.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779981046/cucina_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980565/bagno_heaven_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980420/angolo_cottura_oasis_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779976761/cucina_oasis_hq.jpg",
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980031/bagno_oasis_hq.jpg"
- ],
- Giardino:[
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582022/VillaWaca_Owner_04_uhsjgy.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582021/VillaWaca_Owner_024_lrtlsr.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582023/VillaWaca_Owner_027_khlg5r.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779982064/esterno_hq.jpg",
- "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1800/v1771582021/VillaWaca_Owner_08_grqo7p.jpg"
  ]
 };
 const sliderState={dream:0,heaven:0,oasis:0};
