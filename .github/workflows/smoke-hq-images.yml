@@ -1,0 +1,86 @@
+name: Smoke HQ image audit
+
+on:
+  push:
+    branches: [hq-image-audit-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: npm run build
+
+      - name: JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, pathlib
+          html=pathlib.Path("index.html").read_text()
+          scripts=re.findall(r"<script>([\s\S]*?)</script>",html)
+          pathlib.Path("/tmp/site.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/site.js
+
+      - name: Verify no known low-resolution assets remain
+        shell: bash
+        run: |
+          set -euo pipefail
+          for bad in \
+            PatioSud_uxb3ey \
+            PatioSudDivano_t9j8ql \
+            Copy_of_17132566715449_knzk7e \
+            Copy_of_17132566998848_pjft2t \
+            0a994447-8767-4c38-ab2c-baeec79332b6.jpeg_2023-09-08_08_42_43_x18xsl \
+            49c2301a-dbb5-4b4d-aaa8-0627640117a7.jpeg_2023-09-08_08_42_40_wf3g5w \
+            soggiorno_b72bp5 \
+            Cucinafinestraaperta_amj5lo \
+            stanzamatrimoniale_tgtcap \
+            bagno1_rqfoac; do
+            if grep -q "$bad" index.html; then
+              echo "Low-resolution asset still present: $bad"
+              exit 1
+            fi
+          done
+
+      - name: Verify HQ gallery coverage and anti-upscale transforms
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'Patio_Dream_Golden_Hour_qgj1e6' index.html
+          grep -q 'Patio_Heaven_ki0yrt' index.html
+          grep -q 'Patio_Oasis_HD_gokk7g' index.html
+          test "$(grep -o 'image/upload/f_auto,q_auto,w_[0-9]*/' index.html | wc -l)" -eq 0
+          python - <<'PY'
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          m=re.search(r'Patii:\[(.*?)\n \]',h,re.S)
+          assert m, "Patii gallery missing"
+          urls=re.findall(r'https://res\.cloudinary\.com[^"]+',m.group(1))
+          assert len(urls) >= 12, f"Only {len(urls)} patio photos"
+          print("Patio photos:",len(urls))
+          PY
+
+      - name: Verify all Cloudinary assets return successfully
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/urls.txt
+          import re, pathlib
+          h=pathlib.Path("index.html").read_text()
+          for u in sorted(set(re.findall(r'https://res\.cloudinary\.com/dfu9nzn8r/image/upload/[^"\' )]+',h))):
+              print(u)
+          PY
+          echo "Testing $(wc -l < /tmp/urls.txt) Cloudinary URLs"
+          while IFS= read -r url; do
+            code="$(curl -L --silent --show-error --max-time 20 -o /dev/null -w '%{http_code}' "$url")"
+            if [ "$code" != "200" ]; then
+              echo "Image failed ($code): $url"
+              exit 1
+            fi
+          done < /tmp/urls.txt
