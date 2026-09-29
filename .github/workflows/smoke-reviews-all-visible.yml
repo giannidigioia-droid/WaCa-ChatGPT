@@ -1,0 +1,25 @@
+name: Smoke reviews all visible
+
+on:
+  push:
+    branches: [reviews-all-visible-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify all reviews visible
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/reviews-mock.html
+          grep -q 'Tutte le recensioni disponibili sono mostrate integralmente' dist/reviews-mock.html
+          ! grep -q 'Mostra tutte le recensioni' dist/reviews-mock.html
+          grep -q 'Giwrgos' dist/reviews-mock.html
+          grep -q 'Maria Celeste' dist/reviews-mock.html
+          grep -q 'Marta &amp; Lucio' dist/reviews-mock.html
