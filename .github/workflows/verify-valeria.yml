@@ -1,0 +1,28 @@
+name: Verify Valeria booking in production
+
+on:
+  push:
+    branches: [valeria-final-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production calendar counts and Valeria range
+        shell: bash
+        run: |
+          set -euo pipefail
+          dream="$(curl --fail --silent --show-error "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=dream&_=$(date +%s)")"
+          heaven="$(curl --fail --silent --show-error "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=heaven&_=$(date +%s)")"
+          oasis="$(curl --fail --silent --show-error "https://wa-ca-chat-gpt.vercel.app/api/calendar?unit=oasis&_=$(date +%s)")"
+          test "$(echo "$dream" | jq '.periods|length')" -eq 6
+          test "$(echo "$heaven" | jq '.periods|length')" -eq 19
+          test "$(echo "$oasis" | jq '.periods|length')" -eq 17
+          echo "$heaven" | jq -e '.periods[] | select(.start=="2026-10-16" and .end=="2026-10-23")' >/dev/null
+          echo "Dream: $(echo "$dream" | jq '.periods|length')"
+          echo "Heaven: $(echo "$heaven" | jq '.periods|length')"
+          echo "Oasis: $(echo "$oasis" | jq '.periods|length')"
+          echo "Valeria 2026-10-16 -> 2026-10-23 present"
