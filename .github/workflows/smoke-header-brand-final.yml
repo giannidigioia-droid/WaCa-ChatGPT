@@ -1,0 +1,25 @@
+name: Smoke header brand final
+
+on:
+  push:
+    branches: [header-brand-final2-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify header
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          grep -q 'width:72px;height:72px' dist/index.html
+          grep -q 'Apulian Villa - Monopoli' dist/index.html
+          grep -q 'font-style:italic' dist/index.html
+          grep -q 'brand-waca' dist/index.html
+          grep -q 'mix-blend-mode:multiply' dist/index.html
+          grep -q 'v=3' dist/index.html
