@@ -3,6 +3,7 @@ import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 const siteUrl = "https://villawaca.it";
 const source = await readFile("index.html", "utf8");
 const sourceWhatsappLine = 'var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;';
+const sourceAvailabilityUpdatedLine = 'box.textContent="Aggiornato automaticamente "+new Date().toLocaleDateString("it-IT")+" alle "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});';
 
 const locales = {
   it: {
@@ -20,6 +21,7 @@ const locales = {
     title: "WaCa Apulian Villa | Monopoli, Puglia",
     description: "WaCa Apulian Villa in Monopoli: a saltwater pool villa among olive trees with Dream, Heaven and Oasis apartments.",
     whatsappLine: 'var msg="Hello, I would like to check availability for "+unit+" from "+payload.checkin+" to "+payload.checkout+". Guests: "+payload.adults+" adults, "+payload.children+" children. Name: "+payload.name+". Contact: "+payload.contact;',
+    availabilityUpdatedLine: 'box.textContent="Automatically updated "+new Date().toLocaleDateString("en-GB")+" at "+new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});',
     replacements: {
       "La villa": "The villa",
       "Alloggi": "Stays",
@@ -28,12 +30,7 @@ const locales = {
       "Esplora la villa": "Explore the villa",
       "Il lusso<br>di rallentare.": "The luxury<br>of slowing down.",
       "Una villa privata tra ulivi secolari, a pochi minuti dal mare. Tre spazi indipendenti, un’unica esperienza autentica.": "A private villa among ancient olive trees, just minutes from the sea. Three independent spaces, one authentic experience.",
-      "ospiti": "guests",
-      "OSPITI": "GUESTS",
-      "camere": "bedrooms",
-      "CAMERE": "BEDROOMS",
-      "piscina": "pool",
-      "PISCINA": "POOL",
+      "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>ospiti</span></div><div class=\"stat\"><b>6</b><span>camere</span></div><div class=\"stat\"><b>12×4 m</b><span>piscina</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>": "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>guests</span></div><div class=\"stat\"><b>6</b><span>bedrooms</span></div><div class=\"stat\"><b>12×4 m</b><span>pool</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>",
       "Un rifugio contemporaneo nell’anima della Puglia.": "A contemporary retreat in the soul of Puglia.",
       "Spazi luminosi, silenzio e natura. WaCa può essere riservata interamente oppure vissuta attraverso Dream, Heaven e Oasis. Ogni soggiorno nasce per offrire privacy, comfort e il ritmo lento della campagna pugliese.": "Light-filled spaces, silence and nature. WaCa can be reserved as a whole villa or experienced through Dream, Heaven and Oasis. Every stay is designed for privacy, comfort and the slow rhythm of the Puglian countryside.",
       "Scopri gli alloggi ↗": "Discover the stays ↗",
@@ -78,7 +75,13 @@ const locales = {
       "SOLUZIONE PREFERITA": "PREFERRED STAY",
       "SOLUZIONE PREMIUM": "PREMIUM OPTION",
       "Villa intera": "Whole villa",
-      "fino a": "up to",
+      "4+2 OSPITI": "4+2 GUESTS",
+      "4+1 OSPITI": "4+1 GUESTS",
+      "4 OSPITI": "4 GUESTS",
+      "fino a 4 ospiti": "up to 4 guests",
+      "fino a 5 ospiti": "up to 5 guests",
+      "fino a 6 ospiti": "up to 6 guests",
+      "fino a 15 ospiti": "up to 15 guests",
       "Soggiorno minimo 5 notti. Eccezioni su richiesta via": "Minimum stay 5 nights. Exceptions on request via",
       "Disponibilità WaCa Calendar": "WaCa Calendar availability",
       "Seleziona una soluzione per vedere il calendario.": "Select a stay to view the calendar.",
@@ -96,8 +99,6 @@ const locales = {
       "Torna su ↑": "Back to top ↑",
       "VERIFICA DISPONIBILITÀ": "CHECK AVAILABILITY",
       "Aggiornamento disponibilità in corso…": "Updating availability…",
-      "Aggiornato automaticamente ": "Automatically updated ",
-      " alle ": " at ",
       "Calendario temporaneamente non disponibile.": "Calendar temporarily unavailable.",
       "Il soggiorno minimo è di 5 notti.": "The minimum stay is 5 nights.",
       "Date selezionate. Completa i dati e invia la richiesta.": "Dates selected. Complete your details and send the request.",
@@ -121,6 +122,7 @@ const locales = {
     title: "WaCa Apulian Villa | Monopoli, Pouilles",
     description: "WaCa Apulian Villa a Monopoli : villa avec piscine au sel parmi les oliviers, composee de Dream, Heaven et Oasis.",
     whatsappLine: 'var msg="Bonjour, je souhaite verifier la disponibilite de "+unit+" du "+payload.checkin+" au "+payload.checkout+". Personnes : "+payload.adults+" adultes, "+payload.children+" enfants. Nom : "+payload.name+". Contact : "+payload.contact;',
+    availabilityUpdatedLine: 'box.textContent="Mis a jour automatiquement "+new Date().toLocaleDateString("fr-FR")+" a "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});',
     replacements: {
       "La villa": "La villa",
       "Alloggi": "Hebergements",
@@ -129,12 +131,7 @@ const locales = {
       "Esplora la villa": "Explorer la villa",
       "Il lusso<br>di rallentare.": "Le luxe<br>de ralentir.",
       "Una villa privata tra ulivi secolari, a pochi minuti dal mare. Tre spazi indipendenti, un’unica esperienza autentica.": "Une villa privee parmi les oliviers centenaires, a quelques minutes de la mer. Trois espaces independants, une experience authentique.",
-      "ospiti": "personnes",
-      "OSPITI": "PERSONNES",
-      "camere": "chambres",
-      "CAMERE": "CHAMBRES",
-      "piscina": "piscine",
-      "PISCINA": "PISCINE",
+      "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>ospiti</span></div><div class=\"stat\"><b>6</b><span>camere</span></div><div class=\"stat\"><b>12×4 m</b><span>piscina</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>": "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>personnes</span></div><div class=\"stat\"><b>6</b><span>chambres</span></div><div class=\"stat\"><b>12×4 m</b><span>piscine</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>",
       "Un rifugio contemporaneo nell’anima della Puglia.": "Un refuge contemporain au coeur des Pouilles.",
       "Spazi luminosi, silenzio e natura. WaCa può essere riservata interamente oppure vissuta attraverso Dream, Heaven e Oasis. Ogni soggiorno nasce per offrire privacy, comfort e il ritmo lento della campagna pugliese.": "Des espaces lumineux, du silence et la nature. WaCa peut etre reservee en entier ou vecue a travers Dream, Heaven et Oasis. Chaque sejour est pense pour offrir intimite, confort et le rythme lent de la campagne des Pouilles.",
       "Scopri gli alloggi ↗": "Decouvrir les hebergements ↗",
@@ -179,7 +176,13 @@ const locales = {
       "SOLUZIONE PREFERITA": "OPTION PREFEREE",
       "SOLUZIONE PREMIUM": "OPTION PREMIUM",
       "Villa intera": "Villa entiere",
-      "fino a": "jusqu'a",
+      "4+2 OSPITI": "4+2 PERSONNES",
+      "4+1 OSPITI": "4+1 PERSONNES",
+      "4 OSPITI": "4 PERSONNES",
+      "fino a 4 ospiti": "jusqu'a 4 personnes",
+      "fino a 5 ospiti": "jusqu'a 5 personnes",
+      "fino a 6 ospiti": "jusqu'a 6 personnes",
+      "fino a 15 ospiti": "jusqu'a 15 personnes",
       "Soggiorno minimo 5 notti. Eccezioni su richiesta via": "Sejour minimum de 5 nuits. Exceptions sur demande via",
       "Disponibilità WaCa Calendar": "Disponibilites WaCa Calendar",
       "Seleziona una soluzione per vedere il calendario.": "Selectionnez un hebergement pour voir le calendrier.",
@@ -197,8 +200,6 @@ const locales = {
       "Torna su ↑": "Retour en haut ↑",
       "VERIFICA DISPONIBILITÀ": "VERIFIER LES DISPONIBILITES",
       "Aggiornamento disponibilità in corso…": "Mise a jour des disponibilites…",
-      "Aggiornato automaticamente ": "Mis a jour automatiquement ",
-      " alle ": " a ",
       "Calendario temporaneamente non disponibile.": "Calendrier temporairement indisponible.",
       "Il soggiorno minimo è di 5 notti.": "Le sejour minimum est de 5 nuits.",
       "Date selezionate. Completa i dati e invia la richiesta.": "Dates selectionnees. Completez vos coordonnees et envoyez la demande.",
@@ -222,6 +223,7 @@ const locales = {
     title: "WaCa Apulian Villa | Monopoli, Apulien",
     description: "WaCa Apulian Villa in Monopoli: Villa mit Salzwasserpool zwischen Olivenbaeumen, bestehend aus Dream, Heaven und Oasis.",
     whatsappLine: 'var msg="Hallo, ich moechte die Verfuegbarkeit pruefen fuer "+unit+" vom "+payload.checkin+" bis "+payload.checkout+". Gaeste: "+payload.adults+" Erwachsene, "+payload.children+" Kinder. Name: "+payload.name+". Kontakt: "+payload.contact;',
+    availabilityUpdatedLine: 'box.textContent="Automatisch aktualisiert "+new Date().toLocaleDateString("de-DE")+" um "+new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});',
     replacements: {
       "La villa": "Die Villa",
       "Alloggi": "Unterkuenfte",
@@ -230,12 +232,7 @@ const locales = {
       "Esplora la villa": "Villa entdecken",
       "Il lusso<br>di rallentare.": "Der Luxus,<br>langsamer zu leben.",
       "Una villa privata tra ulivi secolari, a pochi minuti dal mare. Tre spazi indipendenti, un’unica esperienza autentica.": "Eine private Villa zwischen jahrhundertealten Olivenbaeumen, nur wenige Minuten vom Meer entfernt. Drei unabhaengige Bereiche, ein authentisches Erlebnis.",
-      "ospiti": "Gaeste",
-      "OSPITI": "GAESTE",
-      "camere": "Schlafzimmer",
-      "CAMERE": "SCHLAFZIMMER",
-      "piscina": "Pool",
-      "PISCINA": "POOL",
+      "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>ospiti</span></div><div class=\"stat\"><b>6</b><span>camere</span></div><div class=\"stat\"><b>12×4 m</b><span>piscina</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>": "<div class=\"stats\"><div class=\"stat\"><b>15</b><span>Gaeste</span></div><div class=\"stat\"><b>6</b><span>Schlafzimmer</span></div><div class=\"stat\"><b>12×4 m</b><span>Pool</span></div><div class=\"stat\"><b>10 min</b><span>Monopoli</span></div></div>",
       "Un rifugio contemporaneo nell’anima della Puglia.": "Ein moderner Rueckzugsort im Herzen Apuliens.",
       "Spazi luminosi, silenzio e natura. WaCa può essere riservata interamente oppure vissuta attraverso Dream, Heaven e Oasis. Ogni soggiorno nasce per offrire privacy, comfort e il ritmo lento della campagna pugliese.": "Helle Raeume, Ruhe und Natur. WaCa kann als ganze Villa reserviert oder ueber Dream, Heaven und Oasis erlebt werden. Jeder Aufenthalt ist auf Privatsphaere, Komfort und den langsamen Rhythmus der apulischen Landschaft ausgelegt.",
       "Scopri gli alloggi ↗": "Unterkuenfte entdecken ↗",
@@ -280,7 +277,13 @@ const locales = {
       "SOLUZIONE PREFERITA": "BEVORZUGTE OPTION",
       "SOLUZIONE PREMIUM": "PREMIUM-OPTION",
       "Villa intera": "Ganze Villa",
-      "fino a": "bis zu",
+      "4+2 OSPITI": "4+2 GAESTE",
+      "4+1 OSPITI": "4+1 GAESTE",
+      "4 OSPITI": "4 GAESTE",
+      "fino a 4 ospiti": "bis zu 4 Gaeste",
+      "fino a 5 ospiti": "bis zu 5 Gaeste",
+      "fino a 6 ospiti": "bis zu 6 Gaeste",
+      "fino a 15 ospiti": "bis zu 15 Gaeste",
       "Soggiorno minimo 5 notti. Eccezioni su richiesta via": "Mindestaufenthalt 5 Naechte. Ausnahmen auf Anfrage per",
       "Disponibilità WaCa Calendar": "WaCa-Kalender Verfuegbarkeit",
       "Seleziona una soluzione per vedere il calendario.": "Waehlen Sie eine Unterkunft, um den Kalender zu sehen.",
@@ -298,8 +301,6 @@ const locales = {
       "Torna su ↑": "Nach oben ↑",
       "VERIFICA DISPONIBILITÀ": "VERFUEGBARKEIT PRUEFEN",
       "Aggiornamento disponibilità in corso…": "Verfuegbarkeit wird aktualisiert…",
-      "Aggiornato automaticamente ": "Automatisch aktualisiert ",
-      " alle ": " um ",
       "Calendario temporaneamente non disponibile.": "Kalender voruebergehend nicht verfuegbar.",
       "Il soggiorno minimo è di 5 notti.": "Der Mindestaufenthalt betraegt 5 Naechte.",
       "Date selezionate. Completa i dati e invia la richiesta.": "Daten ausgewaehlt. Angaben ergaenzen und Anfrage senden.",
@@ -369,6 +370,9 @@ function renderLocale(code) {
   html = replaceAll(html, 'toLocaleTimeString("it-IT"', `toLocaleTimeString("${locale.localeCode}"`);
   if (locale.whatsappLine) {
     html = replaceAll(html, sourceWhatsappLine, locale.whatsappLine);
+  }
+  if (locale.availabilityUpdatedLine) {
+    html = replaceAll(html, sourceAvailabilityUpdatedLine, locale.availabilityUpdatedLine);
   }
   html = localizeGallery(html, locale.gallery);
   const replacements = Object.entries(locale.replacements).sort((a, b) => b[0].length - a[0].length);
