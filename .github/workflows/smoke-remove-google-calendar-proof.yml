@@ -1,0 +1,23 @@
+name: Smoke remove Google Calendar proof
+
+on:
+  push:
+    branches: [remove-google-calendar-proof-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          ! grep -q 'Disponibilità da Google Calendar' dist/index.html
+          grep -q 'Nessun pagamento ora' dist/index.html
+          grep -q 'Risposta diretta dall’host' dist/index.html
