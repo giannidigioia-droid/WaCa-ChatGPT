@@ -1,0 +1,31 @@
+name: Smoke Heaven render clip
+
+on:
+  push:
+    branches: [heaven-render-clip-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify Heaven clipping markup
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'choice-media choice-media-heaven' dist/index.html
+          grep -q 'top:-18px' dist/index.html
+          grep -q 'height:156px' dist/index.html
+          grep -q 'Patio_Heaven_ki0yrt.png' dist/index.html
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=fs.readFileSync('dist/index.html','utf8');
+          const scripts=[...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');
+          fs.writeFileSync('/tmp/site.js',scripts);
+          NODE
+          node --check /tmp/site.js
