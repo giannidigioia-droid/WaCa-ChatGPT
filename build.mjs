@@ -371,7 +371,8 @@ function renderLocale(code) {
   html = html.replace(/<title>.*?<\/title>/, `<title>${locale.title}</title>`);
   html = html.replace(/<meta name="description" content=".*?">/, `<meta name="description" content="${locale.description}">`);
   html = html.replace(/<link rel="canonical" href=".*?">/, `<link rel="canonical" href="${absolutePath(locale.path)}">\n${alternateLinks(code)}`);
-  html = html.replace('<a class="navcta" href="#booking">Verifica disponibilità</a>', `${languageSwitch(code)}<a class="navcta" href="#booking">Verifica disponibilità</a>`);\n  html = html.replace("__WACA_MOBILE_LANGUAGE_SWITCH__", languageSwitch(code));
+  html = html.replace('<a class="navcta" href="#booking">Verifica disponibilità</a>', `${languageSwitch(code)}<a class="navcta" href="#booking">Verifica disponibilità</a>`);
+  html = html.replace("__WACA_MOBILE_LANGUAGE_SWITCH__", languageSwitch(code));
   html = replaceAll(html, 'toLocaleDateString("it-IT"', `toLocaleDateString("${locale.localeCode}"`);
   html = replaceAll(html, 'toLocaleTimeString("it-IT"', `toLocaleTimeString("${locale.localeCode}"`);
   if (locale.whatsappLine) {
