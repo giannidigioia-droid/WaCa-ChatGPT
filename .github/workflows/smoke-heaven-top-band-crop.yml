@@ -1,0 +1,22 @@
+name: Smoke Heaven top-band crop
+
+on:
+  push:
+    branches: [heaven-top-band-crop-smoke]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify Heaven crop
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+          test -f dist/index.html
+          grep -q 'c_crop,h_990,w_1498,x_0,y_60/c_fill,g_center,h_360,w_900/f_auto/q_auto/v1789651755/Patio_Heaven_ki0yrt.png' dist/index.html
+          grep -q 'data-unit="heaven"' dist/index.html
