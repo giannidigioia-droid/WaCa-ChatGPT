@@ -361,6 +361,12 @@ function localizeGallery(content, gallery) {
 function renderLocale(code) {
   const locale = locales[code];
   let html = source;
+  const protectedBlocks = [];
+  html = html.replace(/<div class="review-grid" id="reviewGrid">[\s\S]*?<\/div>\n<div class="review-actions">/, function(block) {
+    const token = `__WACA_PROTECTED_BLOCK_${protectedBlocks.length}__`;
+    protectedBlocks.push(block);
+    return token;
+  });
   html = html.replace('<html lang="it">', `<html lang="${locale.htmlLang}">`);
   html = html.replace(/<title>.*?<\/title>/, `<title>${locale.title}</title>`);
   html = html.replace(/<meta name="description" content=".*?">/, `<meta name="description" content="${locale.description}">`);
@@ -379,6 +385,9 @@ function renderLocale(code) {
   for (const [from, to] of replacements) {
     html = replaceAll(html, from, to);
   }
+  protectedBlocks.forEach((block, index) => {
+    html = replaceAll(html, `__WACA_PROTECTED_BLOCK_${index}__`, block);
+  });
   return html;
 }
 
