@@ -421,13 +421,18 @@ const galleryData={
  "https://res.cloudinary.com/dfu9nzn8r/image/upload/f_auto,q_auto,c_limit,w_1400/v1779980031/bagno_oasis_hq.jpg"
  ]
 };
+
+function trackWaCaEvent(name,data){
+  try{if(typeof window.va==='function')window.va('event',{name:name,data:data||{}})}catch(e){}
+}
+
 const sliderState={dream:0,heaven:0,oasis:0};
 function mountApartmentSliders(){Object.keys(apartments).forEach(function(id){var root=document.getElementById("slider-"+id);var firstControl=root.querySelector("button");apartments[id].forEach(function(src,i){var img=document.createElement("img");img.src=src;img.loading=i?"lazy":"eager";img.alt=id+" photo "+(i+1);if(i===0)img.className="active";root.insertBefore(img,firstControl)});updateCounter(id)})}
 function slideApt(id,dir){var imgs=document.getElementById("slider-"+id).querySelectorAll("img");imgs[sliderState[id]].classList.remove("active");sliderState[id]=(sliderState[id]+dir+imgs.length)%imgs.length;imgs[sliderState[id]].classList.add("active");updateCounter(id)}
 function updateCounter(id){document.getElementById("counter-"+id).textContent=(sliderState[id]+1)+" / "+apartments[id].length}
 let lbItems=[],lbIndex=0;
-function openApartmentGallery(id){lbItems=apartments[id];lbIndex=sliderState[id];showLightbox()}
-function openLightboxFrom(items,i){lbItems=items;lbIndex=i;showLightbox()}
+function openApartmentGallery(id){trackWaCaEvent('Gallery Opened',{apartment:id});lbItems=apartments[id];lbIndex=sliderState[id];showLightbox()}
+function openLightboxFrom(items,i){trackWaCaEvent('Gallery Photo Opened',{index:i+1});lbItems=items;lbIndex=i;showLightbox()}
 function showLightbox(){document.getElementById("lbImg").src=lbItems[lbIndex];document.getElementById("lightbox").classList.add("open");document.body.style.overflow="hidden"}
 function closeLightbox(e){if(e&&e.target!==document.getElementById("lightbox")&&e.target.className!=="lb-close")return;document.getElementById("lightbox").classList.remove("open");document.body.style.overflow=""}
 function lbMove(dir,e){if(e)e.stopPropagation();lbIndex=(lbIndex+dir+lbItems.length)%lbItems.length;document.getElementById("lbImg").src=lbItems[lbIndex]}
@@ -441,6 +446,7 @@ let calendarMonthOffset=0;
 let calendarRequestController=null;
 let calendarRequestSeq=0;
 function selectUnit(unit){
+  trackWaCaEvent('Accommodation Selected',{unit:unit});
   document.getElementById("unit").value=unit;
   document.querySelectorAll(".choice").forEach(function(b){b.classList.toggle("active",b.dataset.unit===unit)});
   selectedCheckin="";
@@ -510,6 +516,7 @@ function nightsBetween(start,end){
 }
 function chooseCalendarDate(ds){
   if(!calendarAvailable||isBusy(ds)||isPast(ds))return;
+  trackWaCaEvent('Date Selected',{date:ds});
   if(!selectedCheckin||selectedCheckout||ds<=selectedCheckin){
     selectedCheckin=ds;
     selectedCheckout="";
@@ -572,8 +579,9 @@ function renderCalendars(){
   el.appendChild(days);
   wrap.appendChild(el);
 }
-async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
+async function submitBooking(e){e.preventDefault();var unit=document.getElementById("unit").value;trackWaCaEvent('Booking Request Submitted',{unit:unit||'none'});if(!unit){document.getElementById("formStatus").textContent="Seleziona prima una soluzione.";return}var payload={apartment:unit,name:document.getElementById("name").value,contact:document.getElementById("contact").value,checkin:document.getElementById("checkin").value,checkout:document.getElementById("checkout").value,adults:document.getElementById("adults").value,children:document.getElementById("children").value};var st=document.getElementById("formStatus");st.textContent="Invio richiesta…";try{await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})}catch(err){}var msg="Ciao, vorrei verificare la disponibilità di "+unit+" dal "+payload.checkin+" al "+payload.checkout+". Ospiti: "+payload.adults+" adulti, "+payload.children+" ragazzi. Nome: "+payload.name+". Contatto: "+payload.contact;st.textContent="Richiesta preparata. Apertura WhatsApp…";trackWaCaEvent('WhatsApp Opened',{unit:unit});window.open("https://wa.me/393200921182?text="+encodeURIComponent(msg),"_blank")}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLightbox();if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowRight")lbMove(1);if(document.getElementById("lightbox").classList.contains("open")&&e.key==="ArrowLeft")lbMove(-1)});
+document.querySelectorAll('a[href="#booking"]').forEach(function(a){a.addEventListener('click',function(){trackWaCaEvent('Availability CTA Clicked',{location:a.className||'link'})})});
 mountApartmentSliders();initGallery();
 </script>
 
